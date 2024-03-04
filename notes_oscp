@@ -102,7 +102,7 @@ sudo nmap -p ****  -sV -A 172.16      # investigate the app of ports.
 
 
 web
-    中文encode: url encode
+    CN encode: url encode
     #后台地址  Tomcat   /manager/html
               phpMyadmin
     
