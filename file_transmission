@@ -83,3 +83,10 @@ move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);
         curl -X POST -F "file=@xxx.txt" http://192.168.0.102/upload.php
 
 *************************************************************************************
+# LINUX remote desk to win  ,, disable network auth
+rdesktop -u ed 192.168.0.104 -p 12q -g 1200x900 -x -x80  -r sound:local -r disk:netdisk=/home/kali/
+
+# no need to disable net auth
+xfreerdp /u:ed /p:12q /v:192.168.0.104 /w:1200 /h:900 /drive:home,/home/kali 
+
+
