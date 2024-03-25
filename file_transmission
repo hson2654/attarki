@@ -45,14 +45,35 @@
         echo bye >> ftp.txt
         # then on the source host,,  
             ftp -v -n -s:ftp.txt  #-s set the file to run
-
-    # php upload page file
+*************************************************************************************
+    # create a php upload page on the target host to tranfer file
+    # upload.php
 <?php
 $uploaddir = '/var/www/uploads/';
-$uploadfile = uploaddir.$_FILES['file']['name'];
-move_uploaded_file($_FILES['file']['tmp_name'],$uploadfile);
+$uploadfile = $uploaddir . $_FILES['file']['name'];
+if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile))
+        {echo "file upload successfully.";
+}
+else{
+        echo "failed";
+}
 ?>
-
             # ss -pantu  /* to check the socket port
 
+    # upload.html
+<html>
+<head>
+<meta charset="utf-8">
+<title>php-upload</title>
+</head>
+<body>
 
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    <label for="file">upload file：</label>
+    <input type="file" name="file" id="file"><br>
+    <input type="submit" name="submit" value="submit">
+</form>
+</body>
+</html>
+
+*************************************************************************************
