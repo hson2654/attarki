@@ -4,3 +4,15 @@ systeminfo
 
 net uers, net user xx
    net user ls /add  # add accout
+
+lsblk
+
+mount # to notice the disk mount manually
+
+find / -writable -user root -type f -perm -u=s 2>/ev/null
+   # -u=s no less than suid priviledge, -u=x no less than write priviledge
+
+env
+
+#under /var/www/
+      grep -Ri pass .
