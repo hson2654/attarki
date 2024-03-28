@@ -275,9 +275,20 @@ sqli bind # only got true or false result, so use 'and ' or 'or'. so transfer th
 		> run
 		>> open the modified installer on target win host, a reverse shell will be sent. But it will be closed when the insta;;er is shudown.
 
-*********************************************************88
+********************************************************* brute force
 wc # word count
 	-l lines, -w word, -c bytes
 
 /usr/share/wordlists/rockyou.txt
-		
+
+>>tools
+    medusa 
+        -h IP 
+        -u user_name 
+        -p [TEXT]    : Password to test
+        -P [FILE]    : File containing passwords to test
+        -M module -q  : check the available modules
+
+    hydra
+        hydra IP http-form-post "url.php:user=admin&pass=^PASS^:INVALID LOGIN" -l admin -P rockyou.txt -vV -f 
+            ^PASS^ a label
