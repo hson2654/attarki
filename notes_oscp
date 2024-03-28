@@ -275,4 +275,8 @@ sqli bind # only got true or false result, so use 'and ' or 'or'. so transfer th
 		> run
 		>> open the modified installer on target win host, a reverse shell will be sent. But it will be closed when the insta;;er is shudown.
 
+*********************************************************88
+wc # word count
+	-l lines, -w word, -c bytes
+
 			
