@@ -292,3 +292,17 @@ wc # word count
     hydra
         hydra IP http-form-post "url.php:user=admin&pass=^PASS^:INVALID LOGIN" -l admin -P rockyou.txt -vV -f 
             ^PASS^ a label
+    
+    crowbar
+        ssh pub key brute, and win RDP psw brute
+
+>> hash collision
+    hashid  #tool to identify the hash algrith
+
+    hashcat
+        hashcat -m 1470 tar.txt /usr/share/wordlists/rockyou.txt /usr/share/hashcat/rules/best64.rule --force
+            -m the hash type
+            best64.rule is recommended
+    #linux passwd brute
+        unshadow passwd.txt shadow.txt > unshadow.txt
+        john --rules --worldlist=/x/x/rockyou.txt unshadow.txt  # or use hashcat
