@@ -279,4 +279,5 @@ sqli bind # only got true or false result, so use 'and ' or 'or'. so transfer th
 wc # word count
 	-l lines, -w word, -c bytes
 
-			
+/usr/share/wordlists/rockyou.txt
+		
