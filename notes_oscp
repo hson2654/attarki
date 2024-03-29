@@ -306,3 +306,18 @@ wc # word count
     #linux passwd brute
         unshadow passwd.txt shadow.txt > unshadow.txt
         john --rules --worldlist=/x/x/rockyou.txt unshadow.txt  # or use hashcat
+
+********************************************************* port forwarded
+    rinet 
+        cat /etc/rineted.conf
+        0.0.0.0 80 IP 80
+        service rinet start
+    
+    ssh tunnel
+        ssh -N # not execute remote command, useful for port forwarding
+        -L forwarding for loacal
+
+        # local forwarding
+        ssh -N -L 127.0.0.1:port:target_IP:target_port name:IP  
+
+        
