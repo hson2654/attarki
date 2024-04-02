@@ -313,7 +313,7 @@ wc # word count
         0.0.0.0 80 IP 80
         service rinet start
     
-    ssh tunnel
+    ssh tunnel  # requirement openssh  > 7.6
         ssh -N # not execute remote command, useful for port forwarding
         -L forwarding for loacal
 
@@ -321,13 +321,21 @@ wc # word count
         ssh -N -L 127.0.0.1:port:target_IP:target_port name:IP  
 
         
-        # remote
+        # remote 
         ssh -N -R IP_A:port_A:target_IP:target_port name:IP_A  
-            #This is input on the  controlled host, which is used to forward stream from A
+            #This is the input on the  controlled host, which is used to forward streaming from A
             #A is a source host t 
 
-        ssh -N -R 9090 name@IP_A .
+        ssh -N -R 9090 name@IP_A .   # to set a reverse tunnel by ssh from the controlled host to source host
              #This is input on the   controlled host, which is used to forward stream from A
-             #On the  controlled host, a proxy service is needed to forward
-            proxychasins4
-                nano /etc/proxychasins4.conf
+             #On the  controlled host, a proxy tool is needed to forward
+            proxychains4 # or proxychain-ng   which is used to set the proxy for cli command, browser just
+                         #   set socks5 proxy to the specific port
+                $ nano /etc/proxychasins4.conf
+                    socks5 127.0.0.1 xx #port
+                $ proxychains curl IP # or proxychains namp -sT -vv IP (-sT to set a full TCP scan)
+        
+        ssh -N -D 127.0.0.1:9009 name_b@IP_b
+            #-D means initial from sorce host, direct access the jump host
+            #9009 is a target port on the host
+            #As well , proxychains is needed. 
