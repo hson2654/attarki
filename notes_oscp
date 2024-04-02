@@ -321,3 +321,13 @@ wc # word count
         ssh -N -L 127.0.0.1:port:target_IP:target_port name:IP  
 
         
+        # remote
+        ssh -N -R IP_A:port_A:target_IP:target_port name:IP_A  
+            #This is input on the  controlled host, which is used to forward stream from A
+            #A is a source host t 
+
+        ssh -N -R 9090 name@IP_A .
+             #This is input on the   controlled host, which is used to forward stream from A
+             #On the  controlled host, a proxy service is needed to forward
+            proxychasins4
+                nano /etc/proxychasins4.conf
