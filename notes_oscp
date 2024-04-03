@@ -338,5 +338,5 @@ wc # word count
         ssh -N -D 127.0.0.1:9009 name_b@IP_b
             #-D means initial from sorce host, direct access the jump host
             #9009 is a target port on the host
-            b is the controlled host
+            #b is the controlled host
             #As well , proxychains or browser socks5 proxy is needed. 
