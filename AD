@@ -1,0 +1,35 @@
+# on AD DC domain controller
+    dsa.msc # the service of manag AD tree
+
+    setspn -a MSSQL/sqladmin.googboy.com:port goodboy\sqladmin 
+        #sqladmin is a user name,
+                    member of a admin group,which is the accout to run the service
+        # to set a service in the domain
+
+
+    net user  # to view all users on the host
+    net user \domain # to view all users in the domain
+    net user user_name \domain  # the check the proviledge of a user, in order to find high priv account
+
+    net group /domain    #to list all groups
+    net group "group_name" /domain #show the desription of a group, all members
+                # especially domain admin group
+
+
+
+    ************************************************************
+    powersploit
+        /usr/share/windows-resources/powersploit
+        $ cd Recon
+        PowerView.ps1
+        $ Import_Module .\PowerView.ps1
+        $get-domain   # show info of Domain
+        $Get-DomainSID
+        $get user bob /domain  $ user ID pre with Domian sidplay
+        $Get-DomainController
+        $Get-DomainComputer
+        $Get-NetUser
+        $Get-NetGroup group_name
+        $Get-NetGroup "sub group.."
+
+    powershell.exe -ep bypass  # to enable script to be run
