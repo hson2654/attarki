@@ -22,7 +22,7 @@
         /usr/share/windows-resources/powersploit
         $ cd Recon
         PowerView.ps1
-        $ Import_Module .\PowerView.ps1
+        $ Import-Module .\PowerView.ps1
         $get-domain   # show info of Domain
         $Get-DomainSID
         $get user bob /domain  $ user ID pre with Domian sidplay
@@ -33,3 +33,18 @@
         $Get-NetGroup "sub group.."
 
     powershell.exe -ep bypass  # to enable script to be run
+
+************************************************************
+    bloodhound # to collect all info of the DOmain
+        work with neo4j
+            $sudo neo4j console # 
+            $bloodhound
+
+        work with sharphound,which is working on win host client
+            /usr/lib/bloodhound/resources/app/Collectors/SharpHound.ps1   # copy to win client
+            $ Import-Module .\SharpHound.ps1
+            $Invoke-BloodHound -CollectionMethod all -OutputDirectory "Path"
+
+            #get a output file, then sent to kali and upload upon neo4j web.
+            #analysis--> shortest path to Domain admin
+
