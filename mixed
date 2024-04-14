@@ -1,0 +1,1 @@
+  ssh -i id_rsa host_name@IP  # ssh a host using private key
