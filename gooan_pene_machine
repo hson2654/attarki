@@ -89,8 +89,9 @@
 
                         username: mindy
                         pass: P@55W0rd1!2@
-            #ssh mindy to the target
-            #
+            #ssh mindy to the target, get a rbash, to switch to a shell 
+            ssh name#IP "export TERM=xterm; python -c ‘import pty.spawn(\"/bin/bash\")’"
+            # work with the exploit 35513, get a shell finally. 
 
 
 
