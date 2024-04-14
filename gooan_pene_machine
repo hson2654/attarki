@@ -4,6 +4,17 @@
 ***********************************************************
 172.16.33.35
 
+    sudo nmap -p- 172.16.33.35 --open --reason
+        ost is up, received echo-reply ttl 63 (0.034s latency).
+        Not shown: 65529 closed tcp ports (reset)
+        PORT     STATE SERVICE REASON
+        22/tcp   open  ssh     syn-ack ttl 63
+        25/tcp   open  smtp    syn-ack ttl 63
+        80/tcp   open  http    syn-ack ttl 63
+        110/tcp  open  pop3    syn-ack ttl 63
+        119/tcp  open  nntp    syn-ack ttl 63
+        4555/tcp open  rsip    syn-ack ttl 63
+
     nmap -sV -A 172.16.33.35
         Starting Nmap 7.80 ( https://nmap.org ) at 2024-02-01 15:14 CST
         Nmap scan report for 172.16.33.35
