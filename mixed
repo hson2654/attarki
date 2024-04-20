@@ -3,3 +3,5 @@
 gcc xx.c --static # add include files into the file when comply
 
 https://fuzzysecurity.com/tutorials/16.html   # win privi escalate
+
+https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/   # linux privi escalate
