@@ -1,3 +1,5 @@
   ssh -i id_rsa host_name@IP  # ssh a host using private key
 
 gcc xx.c --static # add include files into the file when comply
+
+https://fuzzysecurity.com/tutorials/16.html   # win privi escalate
