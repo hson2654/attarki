@@ -41,3 +41,11 @@ mount # a manual mount disk
       ##GTFOBins capability
 sudo -l #to view all the privi
    ALL, or a direction/application
+
+
+#tool
+
+winpeas
+REG ADDD HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1     # to highlight words
+
+linpeas
