@@ -1,0 +1,51 @@
+www.fuzzysecurity.com/tutorials/
+
+https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+
+systeminfo
+
+uname -a 
+
+cat /etc/os-release , /etc/redhat-release 
+
+ net uers, net user xx
+   net user ls /add  # add accout
+
+dpkg -l
+
+rpm -qa
+
+
+lsblk
+
+mount # to notice the disk mount manually
+
+find / -writable -user root -type f -perm -u=x 2>/ev/null
+   # -u=s no less than suid priviledge, -u=x no less than write priviledge
+find / -user root -type f -perm -u=s 2>/ev/null
+   #GTFOBins   linux
+   #LOLBAS  win
+   #suid  
+      su -
+
+env
+
+#under /var/www/
+      grep -Ri pass .  # to search for potential passwd
+
+mount # a manual mount disk 
+
+# capability
+   getcap -r / 2>/dev/null 
+      if xxx=ep # which is enbale
+      ##GTFOBins capability
+sudo -l #to view all the privi
+   ALL, or a direction/application
+
+
+#tool
+
+winpeas
+REG ADDD HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1     # to highlight words
+
+linpeas
