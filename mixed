@@ -13,3 +13,7 @@ rsg IP port type   # rsg IP port python
   wpscan --api-token $WPSCAN
 
 #UDF   mysql exec shell code
+
+empire
+
+starkiller
