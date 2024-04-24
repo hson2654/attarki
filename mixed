@@ -11,3 +11,5 @@ rsg IP port type   # rsg IP port python
 #for wordpress
   wpscan --url xxx --enumerate ap,at,cb,dbe
   wpscan --api-token $WPSCAN
+
+#UDF   mysql exec shell code
