@@ -7,3 +7,7 @@ https://fuzzysecurity.com/tutorials/16.html   # win privi escalate
 https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/   # linux privi escalate
 
 rsg IP port type   # rsg IP port python
+
+#for wordpress
+  wpscan --url xxx --enumerate ap,at,cb,dbe
+  wpscan --api-token $WPSCAN
