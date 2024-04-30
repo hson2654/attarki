@@ -302,6 +302,8 @@ wc # word count
         hashcat -m 1470 tar.txt /usr/share/wordlists/rockyou.txt /usr/share/hashcat/rules/best64.rule --force
             -m the hash type
             best64.rule is recommended
+	hashcat -D 1,2 -m 300 hash.txt rockyou.txt --force 
+		#-D is the device to choose, 2 is GPU, 1 for CPU
     #linux passwd brute
         unshadow passwd.txt shadow.txt > unshadow.txt
         john --rules --worldlist=/x/x/rockyou.txt unshadow.txt  # or use hashcat
