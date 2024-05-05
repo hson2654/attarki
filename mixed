@@ -15,7 +15,7 @@ rsg IP port type   # rsg IP port python
 #UDF   mysql exec shell code
 
 #get domain info of a linux host
-emum4linux 
+enum4linux 
 
 empire
 
