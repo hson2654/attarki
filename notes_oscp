@@ -366,6 +366,10 @@ wc # word count
             $ window # window -i num
             $ shell -n name  or listen 127.0.0.1:port rIP:rport
 
+ls /bin/nc*
+/bin/nc  /bin/nc.openbsd  /bin/nc.traditional
+
+
 
 
 
