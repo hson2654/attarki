@@ -22,7 +22,7 @@ mount # to notice the disk mount manually
 
 find / -writable -user root -type f -perm -u=x 2>/ev/null
    # -u=s no less than suid priviledge, -u=x no less than write priviledge
-find / -user root -type f -perm -u=s 2>/ev/null
+find / -user root -type f -perm -u=s 2>/dev/null
    #GTFOBins   linux
    #LOLBAS  win
    #suid  

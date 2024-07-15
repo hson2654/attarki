@@ -290,9 +290,13 @@ wc # word count
         -M module -q  : check the available modules
 
     hydra
+<<<<<<< HEAD
         hydra IP http-form-post "/**/url.php:user=admin&pass=^PASS^:INVALID LOGIN" -l admin -P rockyou.txt -vV -f 
             ^PASS^ a label
         hydra 172.16.33.43 http-form-post "/admin/index.php:user=admin&pass=^PASS^:Bad" -l admin -P rockyou.txt -vV -f
+=======
+        hydra -l Otis -P rockyou.txt 172.16.33.55 http-form-post "/monitoring/login.php:username=^USER^:passwd=^PASS^:INVALID LOGIN"  -vV -f
+>>>>>>> 1dbb00a0c70dafb0aa36fb8217493418e26c3746
     
     crowbar
         ssh pub key brute, and win RDP psw brute
@@ -304,6 +308,8 @@ wc # word count
         hashcat -m 1470 tar.txt /usr/share/wordlists/rockyou.txt /usr/share/hashcat/rules/best64.rule --force
             -m the hash type
             best64.rule is recommended
+	hashcat -D 1,2 -m 300 hash.txt rockyou.txt --force 
+		#-D is the device to choose, 2 is GPU, 1 for CPU
     #linux passwd brute
         unshadow passwd.txt shadow.txt > unshadow.txt
         john --rules --worldlist=/x/x/rockyou.txt unshadow.txt  # or use hashcat
@@ -365,6 +371,10 @@ wc # word count
             #on server
             $ window # window -i num
             $ shell -n name  or listen 127.0.0.1:port rIP:rport
+
+ls /bin/nc*
+/bin/nc  /bin/nc.openbsd  /bin/nc.traditional
+
 
 
 
