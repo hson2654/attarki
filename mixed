@@ -34,3 +34,13 @@ sudo python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socke
 #gobuster to detect subdomain
   gobuster vhost -w *** -u http://***.***
 
+#445, 139 win server and  smb. 
+  smbclient used to cennect the server
+    smblient -N \\\\IP\\folder
+
+  impacket  is used to connect sql server microsoft.
+    #some tools of impacket, can be used like
+      python3 psexec.py administrator@{TARGET_IP} # after we got the psswd and id
+      
+                                                                                                         
+
