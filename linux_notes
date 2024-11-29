@@ -5,3 +5,7 @@
     ^ start with
 
 > modinfo <nameofmodule>
+
+> route
+
+> journalctl #view sys log
