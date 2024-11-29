@@ -1,0 +1,7 @@
+> lspci
+
+> lsmod | grep -i ^e
+    -i capital insensitive
+    ^ start with
+
+> modinfo <nameofmodule>
