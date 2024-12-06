@@ -12,7 +12,7 @@ Set-ExecutionPolicy RemoteSigned   #when script is restricted to run
 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass  #When srcpit is not digital signed.
 
-#tools in kali to emulate the domain infor
+#Powerview to emulate the domain infor
   Import-Module .\PowerView.ps1
   Get-NetDOmain
 
