@@ -184,7 +184,7 @@
         //in kali
         $ evil-winrm -u $uesrn -p passwd -i 10.0.2.14 
 
-        // ps - only if this user has the admin privi on this host
+        // ps - only if this user has the admin privi on this host, or use the admin's passwd to start the session
         $New-PSSession -ComputerName $name  //to start a new ps session
 
         $Enter-PSSession 1   //to enter this session
