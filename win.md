@@ -8,7 +8,31 @@
   setspn HTTP/nameofhost(sql.inmy.com) inmy\sqladmin
   >net accounts    /login policy
   >Write-Output "${env:COMPUTERNAME}"  //get computername
+  //if the display of shell is not recgnized,
+>    chcp 65001  //change to utf encode
 
+  netstat -nao //check the services running on Win
+
+  net user $username $passwd  //change the passwd of a user
+  #### turn off firewall
+    $netsh advirewall set allprofiles state off
+  #### check firewall status
+    $netsh advirewall show all profiles
+  #### close defender AV
+    $REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f 
+    $gpupdate /force
+
+  #### allow rdp
+    $REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal" "Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f
+    $netstat -nao
+
+  #### rdp to win
+    $xfreerdp /u:$username /p:$passwd /v:$IP
+  #### verify the hash type
+    $hashid
+
+
+    
 ### emulate info of domain
   powershell.exe -nop -exec bypass  #fireup the powershell
     #Powerview to emulate the domain infor;
