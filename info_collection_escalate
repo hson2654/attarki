@@ -45,7 +45,36 @@ sudo -l #to view all the privi
 
 #tool
 
+### ordinary method
+
 winpeas
 REG ADDD HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1     # to highlight words
 
 linpeas
+
+sudo -l (check what commands current user can run with sudo privilege)
+cat /etc/crontab (cronjobs running)
+cat .bash_history (passwords saved in history)
+env (passwords saved in environment variable)
+uname -ar (kernel exploits)
+ss -tulnp (check for any potential services running)
+getcap -r / 2>/dev/null (capabilities)
+find / -perm -u=s -type f 2>/dev/null (SUID)
+find / -perm -g=s -type f 2>/dev/null (SGID)
+sudo --version (public exploits)
+id (check for docker and lxd group)
+ls -la /etc/passwd (writable /etc/passwd)
+ls -la /etc/shadow (writeable /etc/shadow)
+cat /etc/passwd (find stored hashes)
+Configuration files that contain credentials
+PATH Hijacking
+Password Guessing
+Password Reuse
+Transfer linpeas and perform brute force on password (linpeas parameter -a : brute force)
+Check SETENV ,if we can set environment variables and perform LD_PRELOAD hijacking
+cd / && grep -rnH "password" . 2>/dev/null 
+
+AUTOMATED SCRIPTS
+linpeas,linenum,linux exploit suggester,pspy
+
+
