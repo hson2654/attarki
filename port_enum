@@ -1,0 +1,11 @@
+port 139,445 smb
+
+  smbclient //IP/anonymous   //to visit the shared folder
+
+port 111 rpc 
+  nmap -p 111 --script=nfs-ls,nfs-statfs,nfs-showmount IP 
+    //to view rpc files and folders
+
+  //we can mount the folder to local
+    mount IP:/xx localpath
+    
