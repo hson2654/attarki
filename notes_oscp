@@ -308,6 +308,8 @@ wc # word count
 	//the content of 'F=' only the response word, and user&pass
     crowbar
         ssh pub key brute, and win RDP psw brute
+//account fuzz
+	 wfuzz -u http://10.10.123.111/customers/signup -w /usr/share/seclists/Usernames/Names/names.txt -X post -d "username=FUZZ&email=a%40a.com&password=123&cpassword=123" -H "Content-Type: application/x-www-form-urlencoded" --hw 12
 
 >> hash collision
     hashid  #tool to identify the hash algrith
