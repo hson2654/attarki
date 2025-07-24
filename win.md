@@ -369,4 +369,4 @@
 
 
       PS C:> New-PSSession -ComputerName thmserver1.za.tryhackme.loc
-      PS C:\> Enter-PSSession -ComputerName thmserver1.za.tryhackme.loc  //ssh to the target host.
+      PS C:\> Enter-PSSession -ComputerName thmserver1.za.tryhackme.loc  //WS-MAN is native to Windows and leverages the SOAP protocol,use to login the target host.
