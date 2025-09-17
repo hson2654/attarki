@@ -50,5 +50,4 @@ sudo john --wordlist=xxx targetfile
 ...
 sudo john -show shadow  //to view the result
 
-#### hashcat
-  hashcat -a 0 -m xxx hash.txt wordl.txt
+jar  -ft rev_s.war //to view the jsp file after deploy
