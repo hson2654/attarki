@@ -1,12 +1,23 @@
 ### basic command of domain
   sysdm.cpl   #computer config
+  
   dsa.msc  #AD mgr,add delete user
+  
   net userusername passwd /add /domain     #add domain user
+  
   net group "Domain Admins" clare /add /domain   #add a user to dmmain admin group
+  
   gpupdate /force      #update the gp group policy. \n
+  
   net share sharename=c:\foldername          # share a folder
+  
   setspn HTTP/nameofhost(sql.inmy.com) inmy\sqladmin
+  
+  powershell -ep bypass .\Invoke-PowerShellTcp.ps1  \\run a ps1 script
 
+#### psexec 
+  require IPC$ enabled   \\net share IPC$
+  
 #### powershell history
 Powershell saves all previous commands into a file called ConsoleHost_history. This is located at %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
 setspn -T medin -Q ​ */*  //to extract all accouint in SPN, when we have a normal user in a hsot in AD
