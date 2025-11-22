@@ -19,8 +19,8 @@
   require IPC$ enabled   \\net share IPC$
   
 #### powershell history
-Powershell saves all previous commands into a file called ConsoleHost_history. This is located at %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
-setspn -T medin -Q ​ */*  //to extract all accouint in SPN, when we have a normal user in a hsot in AD
+    Powershell saves all previous commands into a file called ConsoleHost_history. This is located at %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
+    setspn -T medin -Q ​ */*  //to extract all accouint in SPN, when we have a normal user in a hsot in AD
 
 #### xfreerdp
   xfreerdp /v:IP /u:username /p:passwd
