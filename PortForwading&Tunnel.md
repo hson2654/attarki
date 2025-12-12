@@ -27,7 +27,7 @@ Remote
 > B: localhost access a port open in the subnetwork where compromised host sits
 > 
 > > server also set on localhost, this listening IP is used for create tunnel
-> > 	`chisel server -p xxx`
+> > 	`chisel server -p xxx --reverse`
 > > 
 > > on compromised host
 > > 	`chisel client localhostIP:port(you are listening) R:port(localhost):3edhostIP:port(3rd)`
