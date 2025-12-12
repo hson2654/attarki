@@ -29,5 +29,5 @@ Remote
 > > 	`chisel server -p xxx`
 > > on compromised host
 > > 	`chisel client localhostIP:port(you are listening) R:port(localhost):3edhostIP:port(3rd)`
-> >on localhost, access to port 3rd
-> >	`curl http://localhost:port(localhost)'
+> > on localhost, access to port 3rd
+> >	`curl http://localhost:port(localhost)`
