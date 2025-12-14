@@ -6,7 +6,7 @@ Local
 >
 > case B:  access to a port on 3rd host with the same subdomain network of compromised host
 > 		link local port to 3rd target host port
-> > `ssh -L lport:3rdhostIP:rport username@compromisedIP`
+> > `ssh -L localhost:lport:3rdhostIP:rport username@compromisedIP`
 
 
 Remote
