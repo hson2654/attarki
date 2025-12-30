@@ -7,21 +7,24 @@ nc rhost rport < xx.file
 ```
 #### FTP pure-ftpd
 ```
-install pure ftpd
-    1.configure setup-ftpd.sh
-        #!/bin/bash
-        sudo groupadd ftpgroup
-        sudo useradd -g ftpgroup -d /dev/null -s /etc ftpuser
-        sudo pure-pw useradd offsec -u ftpuser -d /ftphome
-        sudo pure-pw mkdb
-        cd /etc/pure-ftpd/auth
-        sudo ln -s ../conf/PureDB 60pdb
-        sudo mkdir -p /ftphome
-        sudo chown -R ftpuser:ftpgroup /ftphome/
-        sudo systemctl restart pure-ftpd
-    2.chmod +x 
-    3  ./setup-ftpd.sh
-    4 systemctl restart pure-ftpd.ser
+0. install pure ftpd
+
+1.configure setup-ftpd.sh
+
+#!/bin/bash
+sudo groupadd ftpgroup
+sudo useradd -g ftpgroup -d /dev/null -s /etc ftpuser
+sudo pure-pw useradd offsec -u ftpuser -d /ftphome
+sudo pure-pw mkdb
+cd /etc/pure-ftpd/auth
+sudo ln -s ../conf/PureDB 60pdb
+sudo mkdir -p /ftphome
+sudo chown -R ftpuser:ftpgroup /ftphome/
+sudo systemctl restart pure-ftpd
+
+2.chmod +x 
+3  ./setup-ftpd.sh
+4 systemctl restart pure-ftpd.ser
 ```
 #### when get a inactive shell
         - to get a better shell
