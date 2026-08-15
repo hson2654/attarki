@@ -29,7 +29,7 @@ Remote
 >  server also set on localhost, this listening IP is used for create tunnel:<br>
 >	`chisel server -p xxx --reverse`<br>
 > on compromised host:<br>
->	`chisel client localhostIP:port(you are listening) R:port(localhost):3edhostIP:port(3rd)`<br>
+>	`chisel client localhostIP:port(you are listening) R:port(localhost):3edhostIP:port(3rd)`<br>  if the 3rdhost is the compromised one, set it as 127.0.0.1
 >
 > on localhost, access to port 3rd:<br>
 >	`curl http://localhost:port(localhost)`
