@@ -10,7 +10,9 @@
 
 #### psexec 
   require IPC$ enabled   \\net share IPC$
-  
+
+To execute psexec, we can enter impacket-psexec with two arguments. The first argument is -hashes, which allows us to use NTLM hashes to authenticate to the target. The format is "LMHash:NTHash", in which we specify the Administrator NTLM hash after the colon. Since we only use the NTLM hash, we can fill the LMHash section with 32 0's.
+
 #### powershell history
     Powershell saves all previous commands into a file called ConsoleHost_history. This is located at %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
     setspn -T medin -Q ​ */*  //to extract all accouint in SPN, when we have a normal user in a hsot in AD
@@ -68,8 +70,8 @@
 ####  PowerUp1.ps1
     get Administrator access.
     the result will be :  C:\Windows\Panther\Unattend\Unattended.xml.
-#### passwd hash format of win
-      hashcat -m 13100
+
+
 #### mimikaz :to get the hash of remote access admin
       privilege::debug    #run this first, to test the privi of mimikaz
       sekurlsa::logonPasswords  #to view the passwd or passwd hash of user login this host
