@@ -96,6 +96,9 @@
 
 `net stop mysql`
 
+//start the service again, or if it is auto restart OS.
+//being in the Administrators group doesn't give you an elevated token by default
+`Start-Process powershell -Verb RunAs`
 
   #### Windows Privileges - SeBackup / SeRestore
     whoami /priv
