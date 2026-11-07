@@ -184,7 +184,8 @@ net user
 ```
 
   #### Windows Privileges - SeBackup / SeRestore
-    ###### may lead to privilege escalation are SeBackupPrivilege, SeAssignPrimaryToken, SeLoadDriver, and SeDebug
+  ###### may lead to privilege escalation are SeBackupPrivilege, SeAssignPrimaryToken, SeLoadDriver, and SeDebug
+    
     whoami /priv
       SeBackupPrivilege             Back up files and directories  Disabled
       SeRestorePrivilege            Restore files and directories  Disabled
