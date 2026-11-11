@@ -7,6 +7,8 @@ net user xxx /domain
 net group /domain
 
 net group "xx xxx" /domain
+
+net accounts    //passwd policy
 ```
 
 ##### Use of PowerView
