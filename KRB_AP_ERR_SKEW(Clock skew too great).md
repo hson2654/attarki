@@ -4,6 +4,8 @@ The DigitalOcean link further down recommends using ntp instead of systemd-times
 prevent weird clock jumps that can break some applications "timestamp in the future, session aborted, etc".
 If on a system with systemd and timedatectl
 ```
+
+###### Sync system time
 ```
 Run sudo edit(nano) /etc/systemd/timesyncd.conf and uncomment NTP= and set your list of space separated servers to try
 ```
@@ -21,3 +23,5 @@ sudo systemctl restart timers.target
 
 then, sudo ntpdate IP
 
+###### For onetime use
+`faketime "$(ntpdate -q dc-ip | cut -d ' ' -f 1,2)" command_to_execute`
