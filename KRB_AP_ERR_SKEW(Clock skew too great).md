@@ -18,10 +18,10 @@ Run sudo edit(nano) /etc/systemd/timesyncd.conf and uncomment NTP= and set your 
 ```
 Then sudo systemctl restart systemd-timesyncd 
   //to put the new changes into effect without rebooting.
-
+```
 sudo systemctl restart timers.target
 
 then, sudo ntpdate IP
-
+```
 ###### For onetime use
 `faketime "$(ntpdate -q dc-ip | cut -d ' ' -f 1,2)" command_to_execute`
