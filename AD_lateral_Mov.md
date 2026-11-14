@@ -137,7 +137,7 @@ tasklist | findstr "calc"
 //We can also set a revshell into cmd
 
 #### Golden Ticket
-
+//login in DC and have admin priv or in admin grp.
 ```
 privilege::debug
 
