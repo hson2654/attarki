@@ -11,4 +11,8 @@
 > journalctl #view sys log
 
 //ad user in linux
-`echo "root2:Fdzt.eqJQ4s0g:0:0:root:/root:/bin/bash" >> /etc/passwd`
+```
+openssl passwd xxx
+
+echo "root2:Fdzt.eqJQ4s0g:0:0:root:/root:/bin/bash" >> /etc/passwd
+```
