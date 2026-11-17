@@ -74,6 +74,8 @@ Get-ObjectAcl -Identity "Management Department" | ? {$_.ActiveDirectoryRights -e
 
 ##### PasswdAttack
 ###### Passwd Spray
+`net accounts`
+
 ```
 in linux
 crackmapexec smb 192.168.50.75 -u dave -p 'Flowers1' -d corp.com
