@@ -1,3 +1,6 @@
+### Socat
+`socat TCP-LISTEN:2222,fork TCP:10.4.50.215:22`
+
 ### SSH
 Local  
 > case A: access to a port only open on the compromised host
