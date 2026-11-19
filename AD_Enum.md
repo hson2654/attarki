@@ -10,7 +10,17 @@ net group "xx xxx" /domain
 
 net accounts    //passwd policy
 ```
-
+###### ps to portscan
+```
+$ip = "<Target_IP>"
+1..1024 | ForEach-Object {
+    $tcp = New-Object System.Net.Sockets.TcpClient
+    if ($tcp.BeginConnect($ip, $_, $null, $null).AsyncWaitHandle.WaitOne(100, $false)) {
+        Write-Host "[+] Port $_ is OPEN" -ForegroundColor Green
+    }
+    $tcp.Close()
+}
+```
 ##### Use of PowerView
 ```
 Get-NetDomain
