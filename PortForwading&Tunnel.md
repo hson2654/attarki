@@ -18,11 +18,13 @@ Dynamic
 ```
 //use socks5 to forward multyple ports, but for some applications needs proxychain4.
 Host A (kali) → Host B (you own and run ssh -L) → Host C (where the SSH connection authenticates) → Host D: (the target)
+
 ssh -N -D 0.0.0.0:9999 user@hostc  //run on hostb
+
 //add this into /etc/proxychains4 in kali
 socks5 hostb port
 
-proxychains smbclient -L //172.16.50.217/ -U hr_admin --password=Welcome1234   //in kali
+proxychains smbclient -L //172.16.50.217/ -U hr_admin --password=Welcome1234   //in kali,, also lie nmap
 ```
 
 Remote
