@@ -33,6 +33,9 @@ Remote
 > 
 >  case B:  verse vesa, 
 >  > `ssh -N -R 127.0.0.1:kali_port:targetIP(host_c):target_port kali@kali_IP`
+//for remote dynamic, change /etc/proxychain4
+>  > socks5 127.0.0.1 port
+>  >
 
 ### Chisel
 - A: let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, in another word, this port only open for localhost
