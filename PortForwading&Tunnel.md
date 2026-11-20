@@ -31,8 +31,8 @@ Remote
 > case A: let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, in another word, this port only open for localhost
 > > `ssh -R:port(compromised):localhost:port(target) username@compromisedIP`
 > 
->  case B:  let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, a port open for the subdomain of localhost
->  > `ssh -R:port(compromised):nearhostIP:rport username@compromisedIP`
+>  case B:  verse vesa, 
+>  > `ssh -N -R 127.0.0.1:kali_port:targetIP(host_c):target_port kali@kali_IP`
 
 ### Chisel
 - A: let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, in another word, this port only open for localhost
