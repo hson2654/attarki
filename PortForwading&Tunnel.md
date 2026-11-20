@@ -10,6 +10,9 @@ Local
 > case B:  access to a port on 3rd host with the same subdomain network of compromised host
 > 		link local port to 3rd target host port
 > > `ssh -L localhost:lport:3rdhostIP:rport username@compromisedIP`
+> >
+> case C: Host A (kali) → Host B (you own and run ssh -L) → Host C (where the SSH connection authenticates) → Host D: (the target).
+> > `ssh -N -L 0.0.0.0:xxxx:<host_d_ip>:xxx <user>@<host_c_ip>` // run in host b
 
 
 Remote
