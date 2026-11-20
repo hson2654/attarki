@@ -14,6 +14,16 @@ Local
 > case C: Host A (kali) → Host B (you own and run ssh -L) → Host C (where the SSH connection authenticates) → Host D: (the target).
 > > `ssh -N -L 0.0.0.0:xxxx:<host_d_ip>:xxx <user>@<host_c_ip>` // run in host b
 
+Dynamic
+```
+//use socks5 to forward multyple ports, but for some applications needs proxychain4.
+Host A (kali) → Host B (you own and run ssh -L) → Host C (where the SSH connection authenticates) → Host D: (the target)
+ssh -N -D 0.0.0.0:9999 user@hostc  //run on hostb
+//add this into /etc/proxychains4 in kali
+socks5 hostb port
+
+proxychains smbclient -L //172.16.50.217/ -U hr_admin --password=Welcome1234   //in kali
+```
 
 Remote
 > case A: let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, in another word, this port only open for localhost
