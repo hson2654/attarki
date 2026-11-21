@@ -56,4 +56,18 @@ Remote
 > on localhost, access to port 3rd:<br>
 >	`curl http://localhost:port(localhost)`
 
-### iox
+### For Win
+##### SSH
+`ssh -N -R port_listening uaerofkali@Kali_IP`
+We can also use remote port Forw
+
+##### plink
+remote port Forw, 
+`plink.exe -ssh -l kali_user -pw <YOUR PASSWORD HERE> -R 127.0.0.1:9833:127.0.0.1:target_port Kali_IP`
+
+##### Netsh
+require administrative priv
+
+`netsh interface portproxy add v4tov4 listenport=2222 listenaddress=192.168.50.64 connectport=22 connectaddress=10.4.50.215`
+//if the ports are not allowed by FW
+`netsh advfirewall firewall add rule name="port_forward_ssh_2222" protocol=TCP dir=in localip=192.168.50.64 localport=2222 action=allow`
