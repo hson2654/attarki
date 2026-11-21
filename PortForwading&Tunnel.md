@@ -28,6 +28,7 @@ proxychains smbclient -L //172.16.50.217/ -U hr_admin --password=Welcome1234   /
 ```
 
 Remote
+//use in kali as the target host's port is reachable locally 
 > case A: let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, in another word, this port only open for localhost
 > > `ssh -R:port(compromised):localhost:port(target) username@compromisedIP`
 > 
