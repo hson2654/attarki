@@ -69,5 +69,7 @@ remote port Forw,
 require administrative priv
 
 `netsh interface portproxy add v4tov4 listenport=2222 listenaddress=192.168.50.64 connectport=22 connectaddress=10.4.50.215`
+
 //if the ports are not allowed by FW
+
 `netsh advfirewall firewall add rule name="port_forward_ssh_2222" protocol=TCP dir=in localip=192.168.50.64 localport=2222 action=allow`
