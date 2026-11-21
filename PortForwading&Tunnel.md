@@ -38,6 +38,18 @@ Remote
 >  > socks5 127.0.0.1 port
 >  >
 
+#### sshuttle
+it requires root privileges on the SSH client and Python3 on the SSH server
+kali owns host_a, host port FortW to host_b port 22
+```
+//on host b, set port Forw
+socat TCP-LISTEN:2222,fork TCP:host_c:22
+
+//specifying the SSH connection string we want to use, as well as the subnets that we want to tunnel through this connection (10.4.50.0/24 and 172.16.50.0/24)
+
+`kali@kali:~$ sshuttle -r database_admin@host_b:2222 10.4.50.0/24 172.16.50.0/24`
+```
+
 ### Chisel
 - A: let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, in another word, this port only open for localhost
  server set on localhost, this listening IP is used for create tunnel <br>
