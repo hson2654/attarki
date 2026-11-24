@@ -2,7 +2,7 @@
 `socat TCP-LISTEN:2222,fork TCP:10.4.50.215:22`
 
 ### SSH
-Local  
+###### Local  
 > case A: access to a port only open on the compromised host
 > 	link  local port to port of target host
 >> `ssh -L lport:localhost:rport  username@compromisedIP`
@@ -14,7 +14,7 @@ Local
 > case C: Host A (kali) → Host B (you own and run ssh -L) → Host C (where the SSH connection authenticates) → Host D: (the target).
 > > `ssh -N -L 0.0.0.0:xxxx:<host_d_ip>:xxx <user>@<host_c_ip>` // run in host b
 
-Dynamic
+###### Dynamic
 ```
 //use socks5 to forward multyple ports, but for some applications needs proxychain4.
 Host A (kali) → Host B (you own and run ssh -L) → Host C (where the SSH connection authenticates) → Host D: (the target)
@@ -27,7 +27,7 @@ socks5 hostb port
 proxychains smbclient -L //172.16.50.217/ -U hr_admin --password=Welcome1234   //in kali,, also lie nmap
 ```
 
-Remote
+###### Remote
 //use in kali as the target host's port is reachable locally 
 > case A: let compromised host access to a remote port, localhost is able to visit, but  compromised host cannot, in another word, this port only open for localhost
 > > `ssh -R:port(compromised):localhost:port(target) username@compromisedIP`
