@@ -26,6 +26,8 @@
     schtasks
     schtasks /query /tn vulntask /fo list /v //to view a particular task
 
+    schtasks /query /fo list | findstr /i "xxx"
+    
     icacls c:\tasks\xxx  //to view the privi, F is full access
 
     //if yes we can modify it as a backdoor,
